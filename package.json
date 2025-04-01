@@ -1,0 +1,31 @@
+{
+  "name": "calendar-task-management",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "b": "pnpm --filter @calendar-task-management/backend",
+    "w": "pnpm --filter @calendar-task-management/webapp",
+    "dev": "pnpm -r --parallel dev",
+    "prettify": "prettier --loglevel warn --cache --write '{**/src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
+    "types": "concurrently 'pnpm b types' 'pnpm w types'",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/node": "^22.13.16",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.23.0",
+    "eslint-plugin-import": "^2.31.0",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
+  }
+}
