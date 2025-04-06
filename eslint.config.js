@@ -4,7 +4,7 @@ import importPlugin from 'eslint-plugin-import'
 export default tseslint.config(
   { ignores: ['dist', 'node_modules'] },
   {
-    extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
+    extends: [...tseslint.configs.recommendedTypeChecked, ...tseslint.configs.stylisticTypeChecked],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
@@ -16,11 +16,12 @@ export default tseslint.config(
       import: importPlugin,
     },
     rules: {
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
       'import/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-          'newlines-between': 'always',
+          'newlines-between': 'never',
           warnOnUnassignedImports: true,
           alphabetize: {
             order: 'asc',

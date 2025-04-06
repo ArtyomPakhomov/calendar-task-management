@@ -1,17 +1,29 @@
 import { initTRPC } from '@trpc/server'
-const trpc = initTRPC.create()
+import _ from 'lodash'
+import { z } from 'zod'
 
-const tasks = [
-  { id: '1', title: 'Title 1', description: 'Description of title 1...' },
-  { id: '2', title: 'Title 2', description: 'Description of title 2...' },
-  { id: '3', title: 'Title 3', description: 'Description of title 3...' },
-  { id: '4', title: 'Title 4', description: 'Description of title 4...' },
-  { id: '5', title: 'Title 5', description: 'Description of title 5...' },
-]
+const tasks = _.times(10, (i) => ({
+  id: `${i + 1}`,
+  title: `Title ${i + 1}`,
+  description: `Description of title ${i + 1}...`,
+}))
+
+const trpc = initTRPC.create()
 
 export const trpcRouter = trpc.router({
   getTasks: trpc.procedure.query(() => {
     return { tasks }
   }),
+  getTask: trpc.procedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(({ input }) => {
+      return {
+        task: tasks.find((task) => task.id === input.id) || null,
+      }
+    }),
 })
 export type TrpcRouter = typeof trpcRouter

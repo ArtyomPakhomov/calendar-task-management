@@ -9,3 +9,5 @@ export type ViewTaskRouteParams = typeof viewTaskRouteParams // => { id: string 
 export const getViewTasksRoute = ({ id }: ViewTaskRouteParams) => `/tasks/${id}`
 // => getViewTasksRoute(viewTaskRouteParams) -> '/tasks/:id'
 // => getViewTasksRoute({ id: task.id }) -> '/tasks/id'
+
+export const getNewTasksRoute = () => '/tasks/new'
