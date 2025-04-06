@@ -9,6 +9,7 @@ export const AllTasksPage = () => {
 
   if (isLoading || isFetching || isPending) return <div>Loading...</div>
   if (isError) return <div>Error: {error.message}</div>
+  console.info(data.tasks)
   return (
     <div>
       <h1>All Tasks</h1>

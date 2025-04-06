@@ -1,24 +1,21 @@
+import { zCreateTaskTrpcInput } from '@calendar-task-management/backend/src/router/createTask/input'
+import { useMutation } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
-import { z } from 'zod'
+import { trpc } from '../../lib/trpc'
 
 export const NewTaskPage = () => {
+  const trpcClint = trpc.useTRPC()
+  const createTask = useMutation(trpcClint.createTask.mutationOptions())
+
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
     },
-    validate: withZodSchema(
-      z.object({
-        title: z
-          .string()
-          .min(1)
-          .regex(/^[a-zA-Z0-9-]+$/, 'Title may contain only letters, numbers and dashes'),
-        description: z.string().min(10, 'Description must be at least 10 characters long'),
-      })
-    ),
-    onSubmit: (values) => {
-      console.info('Submitted', values)
+    validate: withZodSchema(zCreateTaskTrpcInput),
+    onSubmit: async (values) => {
+      await createTask.mutateAsync(values)
     },
   })
 
