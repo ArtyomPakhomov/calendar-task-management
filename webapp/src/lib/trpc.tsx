@@ -1,8 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createTRPCClient, httpBatchLink } from '@trpc/client'
 import { createTRPCContext } from '@trpc/tanstack-react-query'
-
-import type { TrpcRouter } from '@calendar-task-management/backend/src/trpc'
+import type { TrpcRouter } from '@calendar-task-management/backend/src/router'
 
 export const trpc = createTRPCContext<TrpcRouter>()
 // react-refresh/only-export-components
