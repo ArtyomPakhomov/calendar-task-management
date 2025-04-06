@@ -1,7 +1,9 @@
 import { useParams } from 'react-router'
 
+import { ViewTaskRouteParams } from '../../lib/routes'
+
 export const ViewTaskPage = () => {
-  const { id } = useParams() as { id: string }
+  const { id } = useParams() as ViewTaskRouteParams
   return (
     <div>
       <h1>title</h1>

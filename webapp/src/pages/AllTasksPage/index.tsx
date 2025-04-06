@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router'
 
-import { ViewTaskPageRoute } from '../../lib/routes'
+import { getViewTasksRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 export const AllTasksPage = () => {
@@ -10,16 +10,13 @@ export const AllTasksPage = () => {
 
   if (isLoading || isFetching || isPending) return <div>Loading...</div>
   if (isError) return <div>Error: {error.message}</div>
-
-  console.info(data)
-
   return (
     <div>
       <h1>All Tasks</h1>
       <ul>
         {data.tasks.map((task) => (
           <li key={task.id}>
-            <Link to={ViewTaskPageRoute({ id: task.id })}>{task.title}</Link>
+            <Link to={getViewTasksRoute({ id: task.id })}>{task.title}</Link>
             <p>{task.description}</p>
           </li>
         ))}
