@@ -1,5 +1,5 @@
-import globals from 'globals'
 import tseslint from 'typescript-eslint'
+import importPlugin from 'eslint-plugin-import'
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules'] },
@@ -10,22 +10,34 @@ export default tseslint.config(
       ecmaVersion: 'latest',
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
       },
     },
+    plugins: {
+      import: importPlugin,
+    },
     rules: {
-      'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
-      'no-duplicate-imports': ['error', { includeExports: true }],
-      'sort-imports': [
+      'import/order': [
         'error',
         {
-          ignoreCase: false,
-          ignoreDeclarationSort: false,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'single', 'multiple', 'all'],
-          allowSeparatedGroups: false,
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          'newlines-between': 'always',
+          warnOnUnassignedImports: true,
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+            orderImportKind: 'asc',
+          },
+          pathGroups: [
+            {
+              pattern: '*.{css,scss}',
+              group: 'object',
+              position: 'before',
+            },
+          ],
         },
       ],
+      'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+      'no-duplicate-imports': ['error', { includeExports: true }],
     },
   }
 )

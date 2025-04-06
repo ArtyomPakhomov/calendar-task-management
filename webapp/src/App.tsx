@@ -1,5 +1,12 @@
+import { TrpcProvider } from './lib/trpc'
+import { AllTasksPage } from './pages/AllTasksPage/index'
+
 function App() {
-  return <h1>Calendar</h1>
+  return (
+    <TrpcProvider>
+      <AllTasksPage />
+    </TrpcProvider>
+  )
 }
 
 export default App

@@ -1,7 +1,7 @@
 {
   "name": "calendar-task-management",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
   "type": "module",
   "scripts": {
     "b": "pnpm --filter @calendar-task-management/backend",
@@ -12,9 +12,6 @@
     "types": "concurrently 'pnpm b types' 'pnpm w types'",
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.23.0",
     "@types/node": "^22.13.16",

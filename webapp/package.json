@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@calendar-task-management/backend": "workspace:*",
+    "@tanstack/react-query": "^5.71.10",
+    "@trpc/client": "^11.0.2",
+    "@trpc/tanstack-react-query": "^11.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
