@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router'
 
+import { ViewTaskPageRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 export const AllTasksPage = () => {
@@ -17,7 +19,7 @@ export const AllTasksPage = () => {
       <ul>
         {data.tasks.map((task) => (
           <li key={task.id}>
-            <h2>{task.title}</h2>
+            <Link to={ViewTaskPageRoute({ id: task.id })}>{task.title}</Link>
             <p>{task.description}</p>
           </li>
         ))}
