@@ -16,6 +16,24 @@ export default tseslint.config(
       import: importPlugin,
     },
     rules: {
+      'no-restricted-imports': 'off',
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '@calendar-task-management/backend/**',
+                '!@calendar-task-management/backend/**/',
+                '!@calendar-task-management/backend/**/input',
+              ],
+              allowTypeImports: true,
+              message: 'Only types and input schemas are allowed to be imported from backend workspace',
+            },
+          ],
+        },
+      ],
+
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
       'import/order': [
         'error',
