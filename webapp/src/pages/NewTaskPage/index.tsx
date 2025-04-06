@@ -1,4 +1,6 @@
 import { useFormik } from 'formik'
+import { withZodSchema } from 'formik-validator-zod'
+import { z } from 'zod'
 
 export const NewTaskPage = () => {
   const formik = useFormik({
@@ -6,20 +8,15 @@ export const NewTaskPage = () => {
       title: '',
       description: '',
     },
-    validate: (values) => {
-      const errors: Partial<typeof values> = {}
-      if (!values.title) {
-        errors.title = 'Title is required'
-      } else if (!/^[a-zA-Z0-9-]+$/.exec(values.title)) {
-        errors.title = 'Title may contain only letters, numbers and dashes'
-      }
-      if (!values.description) {
-        errors.description = 'Description is required'
-      } else if (values.description.length < 10) {
-        errors.description = 'Description must be at least 10 characters long'
-      }
-      return errors
-    },
+    validate: withZodSchema(
+      z.object({
+        title: z
+          .string()
+          .min(1)
+          .regex(/^[a-zA-Z0-9-]+$/, 'Title may contain only letters, numbers and dashes'),
+        description: z.string().min(10, 'Description must be at least 10 characters long'),
+      })
+    ),
     onSubmit: (values) => {
       console.info('Submitted', values)
     },
