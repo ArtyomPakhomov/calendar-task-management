@@ -2,9 +2,14 @@ import { zCreateTaskTrpcInput } from '@calendar-task-management/backend/src/rout
 import { useMutation } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
+import { useState } from 'react'
+import { Input } from '../../components/Input'
+import { Textarea } from '../../components/Textarea'
 import { trpc } from '../../lib/trpc'
 
 export const NewTaskPage = () => {
+  const [successMessageVisible, setSuccessMessageVisible] = useState(false)
+  const [errorMessageVisible, setErrorMessageVisible] = useState<string | null>(null)
   const trpcClint = trpc.useTRPC()
   const createTask = useMutation(trpcClint.createTask.mutationOptions())
 
@@ -15,7 +20,19 @@ export const NewTaskPage = () => {
     },
     validate: withZodSchema(zCreateTaskTrpcInput),
     onSubmit: async (values) => {
-      await createTask.mutateAsync(values)
+      try {
+        await createTask.mutateAsync(values)
+        formik.resetForm()
+        setSuccessMessageVisible(true)
+        setTimeout(() => {
+          setSuccessMessageVisible(false)
+        }, 3000)
+      } catch (error: any) {
+        setErrorMessageVisible(error.message)
+        setTimeout(() => {
+          setErrorMessageVisible(null)
+        }, 3000)
+      }
     },
   })
 
@@ -28,39 +45,14 @@ export const NewTaskPage = () => {
           formik.handleSubmit()
         }}
       >
-        <div>
-          <label htmlFor="title">Title</label>
-          <br />
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formik.values.title}
-            onChange={(e) => void formik.setFieldValue('title', e.target.value)}
-            onBlur={() => {
-              void formik.setFieldTouched('title', true)
-            }}
-          />
-          {formik.touched.title && formik.errors.title && <div style={{ color: 'red' }}>{formik.errors.title}</div>}
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <br />
-          <textarea
-            id="description"
-            name="description"
-            value={formik.values.description}
-            onChange={(e) => void formik.setFieldValue('description', e.target.value)}
-            onBlur={() => {
-              void formik.setFieldTouched('description', true)
-            }}
-          />
-          {formik.touched.description && formik.errors.description && (
-            <div style={{ color: 'red' }}>{formik.errors.description}</div>
-          )}
-        </div>
+        <Input formik={formik} name="title" label="Title" />
+        <Textarea formik={formik} name="description" label="Description" />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Please fill out all fields</div>}
-        <button type="submit">Create task</button>
+        {!!errorMessageVisible && <div style={{ color: 'red' }}>{errorMessageVisible}</div>}
+        {successMessageVisible && <div style={{ color: 'green' }}>Task created successfully!</div>}
+        <button type="submit" disabled={formik.isSubmitting}>
+          {formik.isSubmitting ? 'Submitting...' : 'Create task'}
+        </button>
       </form>
     </div>
   )

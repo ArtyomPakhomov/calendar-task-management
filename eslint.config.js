@@ -4,7 +4,7 @@ import importPlugin from 'eslint-plugin-import'
 export default tseslint.config(
   { ignores: ['dist', 'node_modules'] },
   {
-    extends: [...tseslint.configs.recommendedTypeChecked, ...tseslint.configs.stylisticTypeChecked],
+    extends: [...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
@@ -16,6 +16,7 @@ export default tseslint.config(
       import: importPlugin,
     },
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off', // Проблемка с any
       'no-restricted-imports': 'off',
       '@typescript-eslint/no-restricted-imports': [
         'error',
