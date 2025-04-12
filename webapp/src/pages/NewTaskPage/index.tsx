@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
+import { Alert } from '../../components/Alert'
 import { Input } from '../../components/Input'
 import { Textarea } from '../../components/Textarea'
 import { trpc } from '../../lib/trpc'
@@ -48,8 +49,8 @@ export const NewTaskPage = () => {
         <Input formik={formik} name="title" label="Title" />
         <Textarea formik={formik} name="description" label="Description" />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Please fill out all fields</div>}
-        {!!errorMessageVisible && <div style={{ color: 'red' }}>{errorMessageVisible}</div>}
-        {successMessageVisible && <div style={{ color: 'green' }}>Task created successfully!</div>}
+        {!!errorMessageVisible && <Alert color="red" children={errorMessageVisible} />}
+        {successMessageVisible && <Alert color="green" children={'Task created successfully!'} />}
         <button type="submit" disabled={formik.isSubmitting}>
           {formik.isSubmitting ? 'Submitting...' : 'Create task'}
         </button>

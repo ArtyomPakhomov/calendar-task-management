@@ -1,0 +1,18 @@
+.alert {
+    padding: 10px;
+    background-repeat: 8px;
+  }
+  
+  .alert.red {
+    background-color: tomato;
+    color: whitesmoke;
+  }
+  .alert.brown {
+    background-color: brown;
+    color: whitesmoke;
+  }
+  .alert.green {
+    background-color: green;
+    color: whitesmoke;
+  }
+  
