@@ -1,16 +1,17 @@
-import { tasks } from '../../lib/ideas'
 import { trpc } from '../../lib/trpc'
 import { zCreateTaskTrpcInput } from './input'
 
-export const createTaskTrpcRoute = trpc.procedure.input(zCreateTaskTrpcInput).mutation(({ input }) => {
-  if (tasks.find((task) => task.title === input.title)) {
+export const createTaskTrpcRoute = trpc.procedure.input(zCreateTaskTrpcInput).mutation(async ({ ctx, input }) => {
+  const exTask = await ctx.prisma.task.findUnique({
+    where: {
+      title: input.title,
+    },
+  })
+  if (exTask) {
     throw new Error('Task already exists')
   }
-  const task = {
-    id: `${Math.random()}`,
-    title: input.title,
-    description: input.description,
-  }
-  tasks.unshift(task)
-  return true
+  const task = await ctx.prisma.task.create({
+    data: input,
+  })
+  return { task }
 })
