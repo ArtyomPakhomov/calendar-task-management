@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router'
-import { getAllTasksRoute, getNewTasksRoute } from '../../lib/routes'
+import { getAllTasksRoute, getNewTasksRoute, getSignUpRoute } from '../../lib/routes'
 
 export const Layout = () => {
   return (
@@ -12,6 +12,9 @@ export const Layout = () => {
           </li>
           <li>
             <Link to={getNewTasksRoute()}>Add Task</Link>
+          </li>
+          <li>
+            <Link to={getSignUpRoute()}>Sign Up</Link>
           </li>
         </ul>
       </nav>

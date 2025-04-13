@@ -17,7 +17,7 @@ export const Textarea = ({ name, label, formik }: { name: string; label: string;
           void formik.setFieldTouched(name, true)
         }}
       />
-      {formik.touched.description && formik.errors.description && <div style={{ color: 'red' }}>{error}</div>}
+      {formik.touched[name] && formik.errors[name] && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   )
 }

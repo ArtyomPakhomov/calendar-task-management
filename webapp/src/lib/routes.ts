@@ -11,3 +11,5 @@ export const getViewTasksRoute = ({ id }: ViewTaskRouteParams) => `/tasks/${id}`
 // => getViewTasksRoute({ id: task.id }) -> '/tasks/id'
 
 export const getNewTasksRoute = () => '/tasks/new'
+
+export const getSignUpRoute = () => '/sign-up'

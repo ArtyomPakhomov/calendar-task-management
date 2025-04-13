@@ -3,7 +3,7 @@ import { trpc } from '../lib/trpc'
 import { createTaskTrpcRoute } from './createTask'
 import { getTaskTrpcRoute } from './getTask'
 import { getTasksTrpcRoute } from './getTasks'
-
+import { signUpTrpcRoute } from './signUp'
 // @endindex
 
 export const trpcRouter = trpc.router({
@@ -11,6 +11,7 @@ export const trpcRouter = trpc.router({
   createTask: createTaskTrpcRoute,
   getTask: getTaskTrpcRoute,
   getTasks: getTasksTrpcRoute,
+  signUp: signUpTrpcRoute,
   // @endindex
 })
 export type TrpcRouter = typeof trpcRouter
@@ -19,4 +20,5 @@ export type TrpcRouter = typeof trpcRouter
 //{"path":"./createTask/index","name":"index","ext":".ts"}
 //{"path":"./getTask/index","name":"index","ext":".ts"}
 //{"path":"./getTasks/index","name":"index","ext":".ts"}
+//{"path":"./signUp/index","name":"index","ext":".ts"}
 // @endindex

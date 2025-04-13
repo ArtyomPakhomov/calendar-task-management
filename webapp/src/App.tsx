@@ -4,6 +4,7 @@ import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllTasksPage } from './pages/AllTasksPage/index'
 import { NewTaskPage } from './pages/NewTaskPage'
+import { SignUpPage } from './pages/SignUp'
 import { ViewTaskPage } from './pages/ViewTaskPage'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
+            <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
             <Route path={routes.getAllTasksRoute()} element={<AllTasksPage />} />
             <Route path={routes.getNewTasksRoute()} element={<NewTaskPage />} />
             <Route path={routes.getViewTasksRoute(routes.viewTaskRouteParams)} element={<ViewTaskPage />} />

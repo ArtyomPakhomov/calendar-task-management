@@ -1,13 +1,24 @@
 import { FormikProps } from 'formik'
 
-export const Input = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
+export const Input = ({
+  name,
+  label,
+  formik,
+  type = 'text',
+}: {
+  name: string
+  label: string
+  formik: FormikProps<any>
+  type?: 'text' | 'password'
+}) => {
   const value = formik.values[name]
   const error = formik.errors[name] as string | undefined // TODO: fix this
   return (
     <div>
       <label htmlFor={name}>{label}</label>
       <br />
-      <textarea
+      <input
+        type={type}
         id={name}
         name={name}
         value={value}
@@ -17,7 +28,7 @@ export const Input = ({ name, label, formik }: { name: string; label: string; fo
           void formik.setFieldTouched(name, true)
         }}
       />
-      {formik.touched.title && formik.errors.title && <div style={{ color: 'red' }}>{error}</div>}
+      {formik.touched[name] && formik.errors[name] && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   )
 }
