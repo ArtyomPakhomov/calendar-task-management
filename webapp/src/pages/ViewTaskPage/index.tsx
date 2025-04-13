@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { format } from 'date-fns/format'
 import { useParams } from 'react-router'
 import { ViewTaskRouteParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
@@ -17,6 +18,9 @@ export const ViewTaskPage = () => {
   return (
     <div>
       <h1>{data.task.title}</h1>
+      <small>
+        Created At: <i>{format(data.task.createdAt, 'yyyy-MM-dd')}</i>
+      </small>
       <p>{data.task.description}</p>
     </div>
   )
