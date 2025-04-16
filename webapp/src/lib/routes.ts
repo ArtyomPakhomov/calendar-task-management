@@ -12,6 +12,10 @@ export const getViewTasksRoute = ({ id }: ViewTaskRouteParams) => `/tasks/${id}`
 
 export const getNewTasksRoute = () => '/tasks/new'
 
+export const editTaskRouteParams = getRouteParams({ id: true })
+export type EditTaskRouteParams = typeof editTaskRouteParams
+export const getEditTaskRoute = ({ id }: EditTaskRouteParams) => `/tasks/${id}/edit`
+
 export const getSignUpRoute = () => '/sign-up'
 export const getSignInRoute = () => '/sign-in'
 

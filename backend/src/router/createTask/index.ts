@@ -5,7 +5,7 @@ export const createTaskTrpcRoute = trpc.procedure.input(zCreateTaskTrpcInput).mu
   if (!ctx.me) {
     throw new Error('UNAUTHORIZED')
   }
-  const exTask = await ctx.prisma.task.findUnique({
+  const exTask = await ctx.prisma.task.findFirst({
     where: {
       title: input.title,
     },

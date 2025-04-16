@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllTasksPage } from './pages/AllTasksPage/index'
+import { EditTaskPage } from './pages/EditTaskPage'
 import { NewTaskPage } from './pages/NewTaskPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
@@ -20,6 +21,7 @@ function App() {
             <Route path={routes.getSignInRoute()} element={<SignInPage />} />
             <Route path={routes.getAllTasksRoute()} element={<AllTasksPage />} />
             <Route path={routes.getNewTasksRoute()} element={<NewTaskPage />} />
+            <Route path={routes.getEditTaskRoute(routes.editTaskRouteParams)} element={<EditTaskPage />} />
             <Route path={routes.getViewTasksRoute(routes.viewTaskRouteParams)} element={<ViewTaskPage />} />
           </Route>
         </Routes>
