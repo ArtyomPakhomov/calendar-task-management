@@ -13,6 +13,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  tasks     Task[]
 }
 
 model Task {
@@ -20,4 +21,6 @@ model Task {
   createdAt   DateTime @default(now())
   title       String   @unique
   description String
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
 }

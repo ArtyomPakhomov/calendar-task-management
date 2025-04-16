@@ -6,6 +6,14 @@ export const getTaskTrpcRoute = trpc.procedure.input(zGetTaskTrpcInput).query(as
     where: {
       id: input.id,
     },
+    include: {
+      author: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   })
   return { task }
 })

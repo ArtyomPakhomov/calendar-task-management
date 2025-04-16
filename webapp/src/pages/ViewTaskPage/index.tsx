@@ -20,6 +20,8 @@ export const ViewTaskPage = () => {
       <h1>{data.task.title}</h1>
       <small>
         Created At: <i>{format(data.task.createdAt, 'yyyy-MM-dd')}</i>
+        <br />
+        Author: <i>{data.task.author.name}</i>
       </small>
       <p>{data.task.description}</p>
     </div>

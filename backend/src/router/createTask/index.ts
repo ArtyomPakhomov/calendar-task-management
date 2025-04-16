@@ -2,6 +2,9 @@ import { trpc } from '../../lib/trpc'
 import { zCreateTaskTrpcInput } from './input'
 
 export const createTaskTrpcRoute = trpc.procedure.input(zCreateTaskTrpcInput).mutation(async ({ ctx, input }) => {
+  if (!ctx.me) {
+    throw new Error('UNAUTHORIZED')
+  }
   const exTask = await ctx.prisma.task.findUnique({
     where: {
       title: input.title,
@@ -11,7 +14,7 @@ export const createTaskTrpcRoute = trpc.procedure.input(zCreateTaskTrpcInput).mu
     throw new Error('Task already exists')
   }
   const task = await ctx.prisma.task.create({
-    data: input,
+    data: { ...input, authorId: ctx.me.id },
   })
   return { task }
 })
