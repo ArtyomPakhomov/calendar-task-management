@@ -2,13 +2,16 @@ import { zSignUpTrpcInput } from '@calendar-task-management/backend/src/router/s
 import { useMutation } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
+import Cookies from 'js-cookie'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { z } from 'zod'
 import { Alert } from '../../components/Alert'
 import { Input } from '../../components/Input'
-import { trpc } from '../../lib/trpc'
+import { getAllTasksRoute } from '../../lib/routes'
+import { queryClient, trpc } from '../../lib/trpc'
 export const SignUpPage = () => {
-  const [successMessageVisible, setSuccessMessageVisible] = useState(false)
+  const navigate = useNavigate()
   const [errorMessageVisible, setErrorMessageVisible] = useState<string | null>(null)
   const trpcClint = trpc.useTRPC()
   const signUp = useMutation(trpcClint.signUp.mutationOptions())
@@ -37,12 +40,10 @@ export const SignUpPage = () => {
     ),
     onSubmit: async (values) => {
       try {
-        await signUp.mutateAsync(values)
-        formik.resetForm()
-        setSuccessMessageVisible(true)
-        setTimeout(() => {
-          setSuccessMessageVisible(false)
-        }, 3000)
+        const { token } = await signUp.mutateAsync(values)
+        Cookies.set('token', token, { expires: 99999 })
+        queryClient.invalidateQueries()
+        navigate(getAllTasksRoute())
       } catch (error: any) {
         setErrorMessageVisible(error.message)
         setTimeout(() => {
@@ -67,7 +68,6 @@ export const SignUpPage = () => {
         <Input formik={formik} name="passwordAgain" label="Password again" type="password" />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>Please fill out all fields</div>}
         {!!errorMessageVisible && <Alert color="red" children={errorMessageVisible} />}
-        {successMessageVisible && <Alert color="green" children={'Thanks for sign up!'} />}
         <button type="submit" disabled={formik.isSubmitting}>
           {formik.isSubmitting ? 'Submitting...' : 'Sign Up'}
         </button>

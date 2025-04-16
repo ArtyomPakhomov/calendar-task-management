@@ -7,8 +7,8 @@
     "b": "pnpm --filter @calendar-task-management/backend",
     "w": "pnpm --filter @calendar-task-management/webapp",
     "dev": "pnpm -r --parallel dev",
-    "prettify": "prettier --loglevel warn --cache --write '{**/src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
+    "prettify": "pnpm -r --parallel prettify",
+    "lint": "concurrently 'pnpm b lint' 'pnpm w lint'",
     "types": "concurrently 'pnpm b types' 'pnpm w types'",
     "prepare": "husky"
   },

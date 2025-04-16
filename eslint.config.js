@@ -1,4 +1,5 @@
 import tseslint from 'typescript-eslint'
+import node from 'eslint-plugin-node'
 import importPlugin from 'eslint-plugin-import'
 
 export default tseslint.config(
@@ -14,8 +15,17 @@ export default tseslint.config(
     },
     plugins: {
       import: importPlugin,
+      node,
     },
     rules: {
+      'node/no-process-env': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: '[object.type=MetaProperty][property.name=env]',
+          message: 'Indtead, use: import { env } from "lib/env"',
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'off', // Проблемка с any
       'no-restricted-imports': 'off',
       '@typescript-eslint/no-restricted-imports': [

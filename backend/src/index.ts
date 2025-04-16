@@ -1,6 +1,8 @@
 import cors from 'cors'
 import express from 'express'
 import { type AppContext, createAppContext } from './lib/ctx'
+import { env } from './lib/env'
+import { applyPassportToExpressApp } from './lib/passport'
 import { applyTrpcToExpressApp } from './lib/trpc'
 import { trpcRouter } from './router'
 
@@ -11,15 +13,11 @@ void (async () => {
     const expressApp = express()
 
     expressApp.use(cors())
-
+    applyPassportToExpressApp(expressApp, ctx)
     applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
 
-    expressApp.get('/ping', (req, res) => {
-      res.send('pong')
-    })
-
-    expressApp.listen(5000, () => {
-      console.info('Listening at http://localhost:5000')
+    expressApp.listen(env.PORT, () => {
+      console.info(`Listening at http://localhost:${env.PORT}`)
     })
   } catch (e) {
     console.error(e)
