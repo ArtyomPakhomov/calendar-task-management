@@ -1,11 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { Link, Outlet } from 'react-router'
+import { useMe } from '../../lib/ctx'
 import * as routes from '../../lib/routes'
-import { trpc } from '../../lib/trpc'
 
 export const Layout = () => {
-  const trpcClint = trpc.useTRPC()
-  const { data, isLoading, isFetching, isError, isPending } = useQuery(trpcClint.getMe.queryOptions())
+  const me = useMe()
 
   return (
     <div>
@@ -16,13 +14,13 @@ export const Layout = () => {
             <Link to={routes.getAllTasksRoute()}>All Tasks</Link>
           </li>
 
-          {isLoading || isFetching || isError || isPending ? null : data.me ? ( // TODO: isError - обработать ошибку отдельно и разлогиниться
+          {me ? (
             <>
               <li>
                 <Link to={routes.getNewTasksRoute()}>Add Task</Link>
               </li>
               <li>
-                <Link to={routes.getSignOutRoute()}>Log Out ({data.me.name})</Link>
+                <Link to={routes.getSignOutRoute()}>Log Out ({me.name})</Link>
               </li>
             </>
           ) : (

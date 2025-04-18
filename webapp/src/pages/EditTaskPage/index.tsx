@@ -6,6 +6,7 @@ import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Textarea } from '../../components/Textarea'
+import { useMe } from '../../lib/ctx'
 import { useForm } from '../../lib/form'
 import { EditTaskRouteParams, getViewTasksRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
@@ -46,32 +47,20 @@ export const EditTaskPage = () => {
 
   const trpcClint = trpc.useTRPC()
   const getTask = useQuery(trpcClint.getTask.queryOptions({ id }))
-  const getMe = useQuery(trpcClint.getMe.queryOptions())
+  const me = useMe()
 
-  if (
-    getTask.isLoading ||
-    getTask.isFetching ||
-    getTask.isPending ||
-    getMe.isLoading ||
-    getMe.isFetching ||
-    getMe.isPending
-  ) {
+  if (getTask.isLoading || getTask.isFetching || getTask.isPending) {
     return <div>Loading...</div>
   }
 
   if (getTask.isError) {
     return <div>Error: {getTask.error.message}</div>
   }
-
-  if (getMe.isError) {
-    return <div>Error: {getMe.error.message}</div>
-  }
   if (!getTask.data.task) {
     return <div>Task not found</div>
   }
 
   const task = getTask.data.task
-  const me = getMe.data.me
 
   if (!task) {
     return <div>Task not found</div>
