@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router'
-import { getViewTasksRoute } from '../../lib/routes'
-import { trpc } from '../../lib/trpc'
+import { getViewTasksRoute } from '../../../lib/routes'
+import { trpc } from '../../../lib/trpc'
 
 export const AllTasksPage = () => {
   const trpcClint = trpc.useTRPC()

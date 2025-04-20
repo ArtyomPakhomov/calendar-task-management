@@ -2,6 +2,7 @@ import { QueryObserverBaseResult, QueryObserverSuccessResult } from '@tanstack/r
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
+import { NotFoundPage } from '../pages/other/NotFoundPage'
 import { AppContext, useAppContext } from './ctx'
 import { getAllTasksRoute } from './routes'
 
@@ -99,14 +100,14 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
   if (checkAccess) {
     const accessDenied = !checkAccess(helperProps)
     if (accessDenied) {
-      return <ErrorPageComponent title={checkAccessTitle} message={checkAccessMessage} />
+      return <NotFoundPage title={checkAccessTitle} message={checkAccessMessage} />
     }
   }
 
   if (checkExists) {
     const notExists = !checkExists(helperProps)
     if (notExists) {
-      return <ErrorPageComponent title={checkExistsTitle} message={checkExistsMessage} />
+      return <NotFoundPage title={checkExistsTitle} message={checkExistsMessage} />
     }
   }
 

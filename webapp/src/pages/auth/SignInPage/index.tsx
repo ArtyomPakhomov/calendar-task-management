@@ -1,14 +1,14 @@
-import { zSignInTrpcInput } from '@calendar-task-management/backend/src/router/signIn/input'
+import { zSignInTrpcInput } from '@calendar-task-management/backend/src/router/auth/signIn/input'
 import { useMutation } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router'
-import { Alert } from '../../components/Alert'
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
-import { useForm } from '../../lib/form'
-import { withPageWrapper } from '../../lib/pageWrapper'
-import { getAllTasksRoute } from '../../lib/routes'
-import { queryClient, trpc } from '../../lib/trpc'
+import { Alert } from '../../../components/Alert'
+import { Button } from '../../../components/Button'
+import { Input } from '../../../components/Input'
+import { useForm } from '../../../lib/form'
+import { withPageWrapper } from '../../../lib/pageWrapper'
+import { getAllTasksRoute } from '../../../lib/routes'
+import { queryClient, trpc } from '../../../lib/trpc'
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,

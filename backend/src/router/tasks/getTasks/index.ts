@@ -1,4 +1,4 @@
-import { trpc } from '../../lib/trpc'
+import { trpc } from '../../../lib/trpc'
 
 export const getTasksTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
   const tasks = await ctx.prisma.task.findMany({

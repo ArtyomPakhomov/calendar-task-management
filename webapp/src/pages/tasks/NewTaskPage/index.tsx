@@ -1,12 +1,12 @@
-import { zCreateTaskTrpcInput } from '@calendar-task-management/backend/src/router/createTask/input'
+import { zCreateTaskTrpcInput } from '@calendar-task-management/backend/src/router/tasks/createTask/input'
 import { useMutation } from '@tanstack/react-query'
-import { Alert } from '../../components/Alert'
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
-import { Textarea } from '../../components/Textarea'
-import { useForm } from '../../lib/form'
-import { withPageWrapper } from '../../lib/pageWrapper'
-import { trpc } from '../../lib/trpc'
+import { Alert } from '../../../components/Alert'
+import { Button } from '../../../components/Button'
+import { Input } from '../../../components/Input'
+import { Textarea } from '../../../components/Textarea'
+import { useForm } from '../../../lib/form'
+import { withPageWrapper } from '../../../lib/pageWrapper'
+import { trpc } from '../../../lib/trpc'
 
 export const NewTaskPage = withPageWrapper({
   authorizedOnly: true,

@@ -3,13 +3,14 @@ import { Layout } from './components/Layout'
 import { AppContextProvider } from './lib/ctx'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
-import { AllTasksPage } from './pages/AllTasksPage/index'
-import { EditTaskPage } from './pages/EditTaskPage'
-import { NewTaskPage } from './pages/NewTaskPage'
-import { SignInPage } from './pages/SignInPage'
-import { SignOutPage } from './pages/SignOutPage'
-import { SignUpPage } from './pages/SignUpPage'
-import { ViewTaskPage } from './pages/ViewTaskPage'
+import { SignInPage } from './pages/auth/SignInPage'
+import { SignOutPage } from './pages/auth/SignOutPage'
+import { SignUpPage } from './pages/auth/SignUpPage'
+import { NotFoundPage } from './pages/other/NotFoundPage'
+import { AllTasksPage } from './pages/tasks/AllTasksPage'
+import { EditTaskPage } from './pages/tasks/EditTaskPage'
+import { NewTaskPage } from './pages/tasks/NewTaskPage'
+import { ViewTaskPage } from './pages/tasks/ViewTaskPage'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path={routes.getNewTasksRoute()} element={<NewTaskPage />} />
               <Route path={routes.getEditTaskRoute(routes.editTaskRouteParams)} element={<EditTaskPage />} />
               <Route path={routes.getViewTasksRoute(routes.viewTaskRouteParams)} element={<ViewTaskPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

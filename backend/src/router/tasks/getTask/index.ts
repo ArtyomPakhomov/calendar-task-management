@@ -1,4 +1,4 @@
-import { trpc } from '../../lib/trpc'
+import { trpc } from '../../../lib/trpc'
 import { zGetTaskTrpcInput } from './input'
 
 export const getTaskTrpcRoute = trpc.procedure.input(zGetTaskTrpcInput).query(async ({ ctx, input }) => {
