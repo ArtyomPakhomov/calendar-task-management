@@ -7,9 +7,12 @@ import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { getAllTasksRoute } from '../../lib/routes'
 import { queryClient, trpc } from '../../lib/trpc'
-export const SignUpPage = () => {
+export const SignUpPage = withPageWrapper({
+  redirectAuthorized: true,
+})(() => {
   const navigate = useNavigate()
   const trpcClint = trpc.useTRPC()
   const signUp = useMutation(trpcClint.signUp.mutationOptions())
@@ -56,4 +59,4 @@ export const SignUpPage = () => {
       </form>
     </div>
   )
-}
+})

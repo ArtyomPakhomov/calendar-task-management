@@ -5,9 +5,12 @@ import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Textarea } from '../../components/Textarea'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { trpc } from '../../lib/trpc'
 
-export const NewTaskPage = () => {
+export const NewTaskPage = withPageWrapper({
+  authorizedOnly: true,
+})(() => {
   const trpcClint = trpc.useTRPC()
   const createTask = useMutation(trpcClint.createTask.mutationOptions())
 
@@ -40,4 +43,4 @@ export const NewTaskPage = () => {
       </form>
     </div>
   )
-}
+})
