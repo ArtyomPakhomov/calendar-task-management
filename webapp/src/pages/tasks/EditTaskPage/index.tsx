@@ -7,7 +7,7 @@ import { Input } from '../../../components/Input'
 import { Textarea } from '../../../components/Textarea'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
-import { EditTaskRouteParams, getViewTasksRoute } from '../../../lib/routes'
+import { type EditTaskRouteParams, getViewTasksRoute } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 
 export const EditTaskPage = withPageWrapper({

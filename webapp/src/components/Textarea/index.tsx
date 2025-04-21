@@ -1,4 +1,4 @@
-import { FormikProps } from 'formik'
+import type { FormikProps } from 'formik'
 
 export const Textarea = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
   const value = formik.values[name]

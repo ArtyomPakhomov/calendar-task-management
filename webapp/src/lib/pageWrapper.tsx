@@ -1,10 +1,10 @@
-import { QueryObserverBaseResult, QueryObserverSuccessResult } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
 import { NotFoundPage } from '../pages/other/NotFoundPage'
-import { AppContext, useAppContext } from './ctx'
+import { type AppContext, useAppContext } from './ctx'
 import { getAllTasksRoute } from './routes'
+import type { QueryObserverBaseResult, QueryObserverSuccessResult } from '@tanstack/react-query'
 
 class GetAuthorizedMeError extends Error {}
 
@@ -58,6 +58,7 @@ type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | u
   setProps?: (setPropsProps: SetPropsProps<TQueryResult>) => TProps
   Page: React.FC<TProps>
 }
+// eslint-disable-next-line react-refresh/only-export-components
 const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | undefined = undefined>({
   authorizedOnly,
   authorizedOnlyTitle = 'Please, Authorize',

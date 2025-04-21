@@ -18,6 +18,7 @@ export default tseslint.config(
       node,
     },
     rules: {
+      '@typescript-eslint/consistent-type-imports': 'error',
       'node/no-process-env': 'error',
       'no-restricted-syntax': [
         'error',

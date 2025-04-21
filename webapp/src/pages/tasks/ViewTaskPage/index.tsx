@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns/format'
 import { Link, useParams } from 'react-router'
 import { withPageWrapper } from '../../../lib/pageWrapper'
-import { getEditTaskRoute, ViewTaskRouteParams } from '../../../lib/routes'
+import { getEditTaskRoute, type ViewTaskRouteParams } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 
 export const ViewTaskPage = withPageWrapper({

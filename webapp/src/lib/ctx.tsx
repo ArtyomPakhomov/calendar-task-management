@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
 import { useQuery } from '@tanstack/react-query'
 import { createContext, useContext } from 'react'
 import { trpc } from './trpc'
+import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
 
 export type AppContext = {
   me: TrpcRouterOutput['getMe']['me']
