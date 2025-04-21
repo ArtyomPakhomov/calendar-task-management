@@ -18,5 +18,6 @@ export const getEditTaskRoute = ({ id }: EditTaskRouteParams) => `/tasks/${id}/e
 
 export const getSignUpRoute = () => '/sign-up'
 export const getSignInRoute = () => '/sign-in'
+export const getEditProfileRoute = () => '/edit-profile'
 
 export const getSignOutRoute = () => '/sign-out'

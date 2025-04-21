@@ -4,6 +4,7 @@ import { trpc } from '../lib/trpc'
 import { getMeTrpcRoute } from './auth/getMe'
 import { signInTrpcRoute } from './auth/signIn'
 import { signUpTrpcRoute } from './auth/signUp'
+import { updateProfileTrpcRoute } from './auth/updateProfile'
 import { createTaskTrpcRoute } from './tasks/createTask'
 import { getTaskTrpcRoute } from './tasks/getTask'
 import { getTasksTrpcRoute } from './tasks/getTasks'
@@ -15,6 +16,7 @@ export const trpcRouter = trpc.router({
   getMe: getMeTrpcRoute,
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
+  updateProfile: updateProfileTrpcRoute,
   createTask: createTaskTrpcRoute,
   getTask: getTaskTrpcRoute,
   getTasks: getTasksTrpcRoute,
@@ -29,6 +31,7 @@ export type TrpcRouterOutput = inferRouterOutputs<TrpcRouter>
 //{"path":"./auth/getMe/index","name":"index","ext":".ts"}
 //{"path":"./auth/signIn/index","name":"index","ext":".ts"}
 //{"path":"./auth/signUp/index","name":"index","ext":".ts"}
+//{"path":"./auth/updateProfile/index","name":"index","ext":".ts"}
 //{"path":"./tasks/createTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTasks/index","name":"index","ext":".ts"}

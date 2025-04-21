@@ -20,6 +20,9 @@ export const Layout = () => {
                 <Link to={routes.getNewTasksRoute()}>Add Task</Link>
               </li>
               <li>
+                <Link to={routes.getEditProfileRoute()}>Edit Profile</Link>
+              </li>
+              <li>
                 <Link to={routes.getSignOutRoute()}>Log Out ({me.name})</Link>
               </li>
             </>

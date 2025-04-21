@@ -11,6 +11,7 @@ export const getTaskTrpcRoute = trpc.procedure.input(zGetTaskTrpcInput).query(as
         select: {
           id: true,
           name: true,
+          email: true,
         },
       },
     },

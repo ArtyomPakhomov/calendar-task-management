@@ -23,7 +23,7 @@ export const ViewTaskPage = withPageWrapper({
       <small>
         Created At: <i>{format(task.createdAt, 'yyyy-MM-dd')}</i>
         <br />
-        Author: <i>{task.author.name}</i>
+        Author: <i>{task.author.name}</i> Email: <i>{task.author.email}</i>
       </small>
       <p>{task.description}</p>
       {me.id === task.authorId && (
