@@ -11,8 +11,8 @@ export type AppContext = {
 const AppReactContext = createContext<AppContext>({ me: null })
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const trpcClint = trpc.useTRPC()
-  const { data, error, isError, isLoading, isFetching, isPending } = useQuery(trpcClint.getMe.queryOptions())
+  const useTrpc = trpc.useTRPC()
+  const { data, error, isError, isLoading, isFetching, isPending } = useQuery(useTrpc.getMe.queryOptions())
 
   return (
     <AppReactContext.Provider

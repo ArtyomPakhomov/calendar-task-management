@@ -8,8 +8,8 @@ import { trpc } from '../../../lib/trpc'
 export const ViewTaskPage = withPageWrapper({
   useQuery: () => {
     const { id } = useParams() as ViewTaskRouteParams
-    const trpcClint = trpc.useTRPC()
-    const queryResult = useQuery(trpcClint.getTask.queryOptions({ id }))
+    const useTrpc = trpc.useTRPC()
+    const queryResult = useQuery(useTrpc.getTask.queryOptions({ id }))
     return queryResult
   },
   setProps: ({ queryResult, checkExists, getAuthorizedMe }) => ({

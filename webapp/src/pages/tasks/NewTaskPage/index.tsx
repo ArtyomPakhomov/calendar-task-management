@@ -11,8 +11,8 @@ import { trpc } from '../../../lib/trpc'
 export const NewTaskPage = withPageWrapper({
   authorizedOnly: true,
 })(() => {
-  const trpcClint = trpc.useTRPC()
-  const createTask = useMutation(trpcClint.createTask.mutationOptions())
+  const useTrpc = trpc.useTRPC()
+  const createTask = useMutation(useTrpc.createTask.mutationOptions())
 
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {

@@ -11,13 +11,13 @@ import { queryClient, trpc } from '../../../lib/trpc'
 import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
 
 const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) => {
-  const trpcClient = trpc.useTRPC()
-  console.info(trpcClient.getMe.queryKey())
+  const useTrpc = trpc.useTRPC()
+  console.info(useTrpc.getMe.queryKey())
 
-  //   const data = queryClient.getQueryData(trpcClient.getMe.queryKey())
+  //   const data = queryClient.getQueryData(useTrpc.getMe.queryKey())
   //   console.info(data)
 
-  const updateProfile = useMutation(trpcClient.updateProfile.mutationOptions())
+  const updateProfile = useMutation(useTrpc.updateProfile.mutationOptions())
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
       name: me.name,
@@ -26,7 +26,7 @@ const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) =
     validationSchema: zUpdateProfileTrpcInput,
     onSubmit: async (values) => {
       const updatedMe = await updateProfile.mutateAsync(values)
-      queryClient.setQueryData(trpcClient.getMe.queryKey(), { me: updatedMe })
+      queryClient.setQueryData(useTrpc.getMe.queryKey(), { me: updatedMe })
     },
     successMessage: 'Profile updated',
     resetOnSuccess: false,
@@ -45,8 +45,8 @@ const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) =
 }
 
 const Password = () => {
-  const trpcClient = trpc.useTRPC()
-  const updatePassword = useMutation(trpcClient.updatePassword.mutationOptions())
+  const useTrpc = trpc.useTRPC()
+  const updatePassword = useMutation(useTrpc.updatePassword.mutationOptions())
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
       oldPassword: '',

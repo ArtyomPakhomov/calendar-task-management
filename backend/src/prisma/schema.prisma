@@ -17,10 +17,11 @@ model User {
 }
 
 model Task {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  title       String   @unique
-  description String
-  authorId    String
-  author      User     @relation(fields: [authorId], references: [id])
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  serialNumber Int      @unique @default(autoincrement())
+  title        String   @unique
+  description  String
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id])
 }

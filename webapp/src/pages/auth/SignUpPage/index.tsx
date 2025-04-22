@@ -14,8 +14,8 @@ export const SignUpPage = withPageWrapper({
   redirectAuthorized: true,
 })(() => {
   const navigate = useNavigate()
-  const trpcClint = trpc.useTRPC()
-  const signUp = useMutation(trpcClint.signUp.mutationOptions())
+  const useTrpc = trpc.useTRPC()
+  const signUp = useMutation(useTrpc.signUp.mutationOptions())
 
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {

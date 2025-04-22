@@ -14,8 +14,8 @@ export const EditTaskPage = withPageWrapper({
   authorizedOnly: true,
   useQuery: () => {
     const { id } = useParams() as EditTaskRouteParams
-    const trpcClint = trpc.useTRPC()
-    const queryResult = useQuery(trpcClint.getTask.queryOptions({ id }))
+    const useTrpc = trpc.useTRPC()
+    const queryResult = useQuery(useTrpc.getTask.queryOptions({ id }))
     return queryResult
   },
 
@@ -26,8 +26,8 @@ export const EditTaskPage = withPageWrapper({
   },
 })(({ task }) => {
   const navigate = useNavigate()
-  const trpcClint = trpc.useTRPC()
-  const updateTask = useMutation(trpcClint.updateTask.mutationOptions())
+  const useTrpc = trpc.useTRPC()
+  const updateTask = useMutation(useTrpc.updateTask.mutationOptions())
 
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {

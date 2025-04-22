@@ -8,7 +8,6 @@ import { env } from './env'
 import type { TrpcRouter } from '@calendar-task-management/backend/src/router'
 
 export const trpc = createTRPCContext<TrpcRouter>()
-
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -18,7 +17,7 @@ export const queryClient = new QueryClient({
   },
 })
 
-const trpcClient = createTRPCClient<TrpcRouter>({
+export const trpcClient = createTRPCClient<TrpcRouter>({
   links: [
     httpBatchLink({
       url: env.VITE_BACKEND_TRPC_URL,
@@ -32,7 +31,6 @@ const trpcClient = createTRPCClient<TrpcRouter>({
     }),
   ],
 })
-
 export const TrpcProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
