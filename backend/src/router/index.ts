@@ -8,6 +8,7 @@ import { updateProfileTrpcRoute } from './auth/updateProfile'
 import { createTaskTrpcRoute } from './tasks/createTask'
 import { getTaskTrpcRoute } from './tasks/getTask'
 import { getTasksTrpcRoute } from './tasks/getTasks'
+import { setTaskLikeTrpcRoute } from './tasks/setTaskLike'
 import { updateTaskTrpcRoute } from './tasks/updateTask'
 // @endindex
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
@@ -22,6 +23,7 @@ export const trpcRouter = trpc.router({
   createTask: createTaskTrpcRoute,
   getTask: getTaskTrpcRoute,
   getTasks: getTasksTrpcRoute,
+  setTaskLike: setTaskLikeTrpcRoute,
   updateTask: updateTaskTrpcRoute,
   // @endindex
 })
@@ -38,5 +40,6 @@ export type TrpcRouterOutput = inferRouterOutputs<TrpcRouter>
 //{"path":"./tasks/createTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTasks/index","name":"index","ext":".ts"}
+//{"path":"./tasks/setTaskLike/index","name":"index","ext":".ts"}
 //{"path":"./tasks/updateTask/index","name":"index","ext":".ts"}
 // @endindex

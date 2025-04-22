@@ -2,12 +2,17 @@ import { trpc } from '../../../lib/trpc'
 import { zGetTasksTrpcInput } from './input'
 
 export const getTasksTrpcRoute = trpc.procedure.input(zGetTasksTrpcInput).query(async ({ ctx, input }) => {
-  const tasks = await ctx.prisma.task.findMany({
+  const rawTasks = await ctx.prisma.task.findMany({
     select: {
       id: true,
       title: true,
       description: true,
       serialNumber: true,
+      _count: {
+        select: {
+          tasksLikes: true,
+        },
+      },
     },
     orderBy: [
       {
@@ -21,8 +26,16 @@ export const getTasksTrpcRoute = trpc.procedure.input(zGetTasksTrpcInput).query(
     take: input.limit + 1,
   })
 
-  const nextTask = tasks.at(input.limit)
+  const nextTask = rawTasks.at(input.limit)
   const nextCursor = nextTask?.serialNumber
-  const tasksExceptNext = tasks.slice(0, input.limit)
-  return { tasks: tasksExceptNext, nextCursor }
+  const rawTasksExceptNext = rawTasks.slice(0, input.limit)
+
+  const tasks = rawTasksExceptNext.map((task) => ({
+    id: task.id,
+    title: task.title,
+    description: task.description,
+    likesCount: task._count.tasksLikes,
+  }))
+
+  return { tasks, nextCursor }
 })

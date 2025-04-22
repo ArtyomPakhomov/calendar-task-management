@@ -46,6 +46,7 @@ export const AllTasksPage = () => {
                   {task.title}
                 </Link>
                 <p className={css.taskDescription}>{task.description}</p>
+                <div>Likes: {task.likesCount}</div>
               </li>
             ))}
         </InfiniteScroll>

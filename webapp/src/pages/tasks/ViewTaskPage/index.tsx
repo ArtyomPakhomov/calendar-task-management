@@ -4,12 +4,16 @@ import { Link, useParams } from 'react-router'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getEditTaskRoute, type ViewTaskRouteParams } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
+import { LikeButton } from './LikeButton'
 
 export const ViewTaskPage = withPageWrapper({
+  showLoaderOnFetching: false,
   useQuery: () => {
     const { id } = useParams() as ViewTaskRouteParams
     const useTrpc = trpc.useTRPC()
-    const queryResult = useQuery(useTrpc.getTask.queryOptions({ id }))
+    // const data = queryClient.getQueryData(useTrpc.getTask.queryKey({ taskId: id }))
+    // console.info(data)
+    const queryResult = useQuery(useTrpc.getTask.queryOptions({ taskId: id }))
     return queryResult
   },
   setProps: ({ queryResult, checkExists, getAuthorizedMe }) => ({
@@ -26,6 +30,15 @@ export const ViewTaskPage = withPageWrapper({
         Author: <i>{task.author.name}</i> Email: <i>{task.author.email}</i>
       </small>
       <p>{task.description}</p>
+      <div>
+        Likes: {task.likesCount}
+        {me && (
+          <>
+            <br />
+            <LikeButton task={task} />
+          </>
+        )}
+      </div>
       {me.id === task.authorId && (
         <div>
           <Link to={getEditTaskRoute({ id: task.id })}>Edit Task</Link>

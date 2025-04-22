@@ -15,7 +15,7 @@ export const EditTaskPage = withPageWrapper({
   useQuery: () => {
     const { id } = useParams() as EditTaskRouteParams
     const useTrpc = trpc.useTRPC()
-    const queryResult = useQuery(useTrpc.getTask.queryOptions({ id }))
+    const queryResult = useQuery(useTrpc.getTask.queryOptions({ taskId: id }))
     return queryResult
   },
 
