@@ -1,6 +1,6 @@
 @use '../../styles/vars';
 @use '../../styles/mixins';
-@import '../../../node_modules/include-media/dist/include-media';
+@use '../../../node_modules/include-media/dist/include-media';
 
 $breakpoint: '900px';
 
