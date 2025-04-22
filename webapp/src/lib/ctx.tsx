@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useQuery } from '@tanstack/react-query'
 import { createContext, useContext } from 'react'
+import { Loader } from '../components/Loader'
 import { trpc } from './trpc'
 import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
 
@@ -21,7 +22,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
       }}
     >
       {isLoading || isFetching || isPending ? (
-        <div>Loading...</div>
+        <Loader type="page" />
       ) : isError ? (
         <div>Error: {error.message}</div>
       ) : (

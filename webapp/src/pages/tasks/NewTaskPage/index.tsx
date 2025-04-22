@@ -39,7 +39,9 @@ export const NewTaskPage = withPageWrapper({
         <Input formik={formik} name="title" label="Title" />
         <Textarea formik={formik} name="description" label="Description" />
         <Alert {...alertProps} />
-        <Button type="submit" children="Create task" {...buttonProps} />
+        <Button type="submit" {...buttonProps}>
+          Create task
+        </Button>
       </form>
     </div>
   )

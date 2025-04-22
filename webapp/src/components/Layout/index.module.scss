@@ -47,7 +47,6 @@ $breakpoint: '900px';
     padding: 20px 30px;
     @media (max-width: $breakpoint) {
       overflow: visible;
-      flex: 0 0 auto;
       height: auto;
     }
   }

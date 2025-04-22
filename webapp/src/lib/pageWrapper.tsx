@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
+import { Loader } from '../components/Loader'
 import { NotFoundPage } from '../pages/other/NotFoundPage'
 import { type AppContext, useAppContext } from './ctx'
 import { getAllTasksRoute } from './routes'
@@ -87,7 +88,7 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
   }, [redirectNeeded, navigate])
 
   if (queryResult?.isPending || queryResult?.isLoading || queryResult?.isFetching || redirectNeeded) {
-    return <div>Loading...</div>
+    return <Loader type="page" />
   }
   if (authorizedOnly && !ctx.me) {
     return <ErrorPageComponent title={authorizedOnlyTitle} message={authorizedOnlyMessage} />

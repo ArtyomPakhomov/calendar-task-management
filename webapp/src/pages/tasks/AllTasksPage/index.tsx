@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router'
 import { layoutContentElRef } from '../../../components/Layout'
+import { Loader } from '../../../components/Loader'
 import { getViewTasksRoute } from '../../../lib/routes'
 import { trpc, trpcClient } from '../../../lib/trpc'
 import css from './index.module.scss'
@@ -13,14 +14,14 @@ export const AllTasksPage = () => {
       queryFn: async ({ pageParam }) => {
         return await trpcClient.getTasks.query({
           cursor: pageParam,
-          limit: 2,
+          limit: 5,
         })
       },
       initialPageParam: 0,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
     })
 
-  if (isLoading || isRefetching) return <div>Loading...</div>
+  if (isLoading || isRefetching) return <Loader type="section" />
   if (isError) return <div>Error: {error?.message}</div>
   if (!data) return <div>No data</div>
 
@@ -32,7 +33,8 @@ export const AllTasksPage = () => {
           threshold={250}
           loadMore={() => hasNextPage && !isFetchingNextPage && fetchNextPage()}
           hasMore={hasNextPage}
-          loader={<div key="loader">Loading ...</div>}
+          // loader={<div key="loader">Loading ...</div>}
+          loader={<Loader type="section" key={'loader'} />}
           getScrollParent={() => layoutContentElRef.current}
           useWindow={(layoutContentElRef.current && getComputedStyle(layoutContentElRef.current).overflow) !== 'auto'}
         >

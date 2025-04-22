@@ -1,0 +1,15 @@
+@use '../../styles/mixins';
+@use '../../styles/vars';
+
+.button {
+  position: relative;
+  padding: 5px;
+}
+
+.loading {
+  @include mixins.loader($borderWidth: 3px, $size: 20px, $color: vars.$white);
+
+  .text {
+    opacity: 0;
+  }
+}
