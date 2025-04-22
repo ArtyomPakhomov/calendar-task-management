@@ -12,6 +12,7 @@ import { AllTasksPage } from './pages/tasks/AllTasksPage'
 import { EditTaskPage } from './pages/tasks/EditTaskPage'
 import { NewTaskPage } from './pages/tasks/NewTaskPage'
 import { ViewTaskPage } from './pages/tasks/ViewTaskPage'
+import './styles/global.scss'
 
 function App() {
   return (

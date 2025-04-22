@@ -1,0 +1,54 @@
+@use '../../styles/vars';
+@use '../../styles/mixins';
+@import '../../../node_modules/include-media/dist/include-media';
+
+$breakpoint: '900px';
+
+.logo {
+  @include mixins.h1;
+}
+
+.layout {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+  @media (max-width: $breakpoint) {
+    flex-flow: column nowrap;
+  }
+  .navigation {
+    height: 100%;
+    overflow: auto;
+    flex: 0 0 300px;
+    padding: 20px 30px;
+    border-right: 1px solid vars.$black;
+    @media (max-width: $breakpoint) {
+      overflow: visible;
+      flex: 0 0 auto;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid vars.$black;
+    }
+    .menu {
+      .item {
+        &:not(:first-child) {
+          margin-top: 5px;
+        }
+
+        .link {
+          @include mixins.link;
+        }
+      }
+    }
+  }
+  .content {
+    height: 100%;
+    overflow: auto;
+    flex: 1 1 100%;
+    padding: 20px 30px;
+    @media (max-width: $breakpoint) {
+      overflow: visible;
+      flex: 0 0 auto;
+      height: auto;
+    }
+  }
+}

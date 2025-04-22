@@ -1,0 +1,28 @@
+@use '../../../styles/vars';
+@use '../../../styles/mixins';
+
+.title {
+  @include mixins.h1;
+}
+
+.tasks {
+  .task {
+    padding: 20px;
+    border: 1px solid vars.$black;
+    border-radius: 10px;
+    & + .task {
+      margin-top: 20px;
+    }
+
+    .taskName {
+      @include mixins.h2;
+      .taskLink {
+        @include mixins.link;
+      }
+    }
+
+    .taskDescription {
+      font-size: 18px;
+    }
+  }
+}

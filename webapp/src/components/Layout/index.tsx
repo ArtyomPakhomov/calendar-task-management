@@ -1,16 +1,20 @@
+import { createRef } from 'react'
 import { Link, Outlet } from 'react-router'
 import { useMe } from '../../lib/ctx'
 import * as routes from '../../lib/routes'
+import css from './index.module.scss'
+
+export const layoutContentElRef = createRef<HTMLDivElement>()
 
 export const Layout = () => {
   const me = useMe()
 
   return (
-    <div>
-      <h1>Calendar Task Management</h1>
-      <nav>
-        <ul>
-          <li>
+    <div className={css.layout}>
+      <nav className={css.navigation}>
+        <h1 className={css.logo}>Calendar Task Management</h1>
+        <ul className={css.menu}>
+          <li className={css.item}>
             <Link to={routes.getAllTasksRoute()}>All Tasks</Link>
           </li>
 
@@ -38,7 +42,9 @@ export const Layout = () => {
           )}
         </ul>
       </nav>
-      <Outlet />
+      <div className={css.content} ref={layoutContentElRef}>
+        <Outlet />
+      </div>
     </div>
   )
 }

@@ -1,8 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router'
+import { layoutContentElRef } from '../../../components/Layout'
 import { getViewTasksRoute } from '../../../lib/routes'
 import { trpc, trpcClient } from '../../../lib/trpc'
+import css from './index.module.scss'
 export const AllTasksPage = () => {
   const useTrpc = trpc.useTRPC()
   const { data, error, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage, isRefetching } =
@@ -24,21 +26,24 @@ export const AllTasksPage = () => {
 
   return (
     <div>
-      <h1>All Tasks</h1>
-      <ul>
+      <h1 className={css.title}>All Tasks</h1>
+      <ul className={css.tasks}>
         <InfiniteScroll
           threshold={250}
           loadMore={() => hasNextPage && !isFetchingNextPage && fetchNextPage()}
           hasMore={hasNextPage}
           loader={<div key="loader">Loading ...</div>}
-          useWindow={true}
+          getScrollParent={() => layoutContentElRef.current}
+          useWindow={(layoutContentElRef.current && getComputedStyle(layoutContentElRef.current).overflow) !== 'auto'}
         >
           {data.pages
             .flatMap((page) => page.tasks)
             .map((task) => (
-              <li key={task.id}>
-                <Link to={getViewTasksRoute({ id: task.id })}>{task.title}</Link>
-                <p>{task.description}</p>
+              <li key={task.id} className={css.task}>
+                <Link className={css.taskName} to={getViewTasksRoute({ id: task.id })}>
+                  {task.title}
+                </Link>
+                <p className={css.taskDescription}>{task.description}</p>
               </li>
             ))}
         </InfiniteScroll>
