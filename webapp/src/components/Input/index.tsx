@@ -5,11 +5,13 @@ export const Input = ({
   label,
   formik,
   type = 'text',
+  width,
 }: {
   name: string
   label: string
   formik: FormikProps<any>
   type?: 'text' | 'password'
+  width?: string | number
 }) => {
   const value = formik.values[name]
   const error = formik.errors[name] as string | undefined // TODO: fix this
@@ -18,6 +20,7 @@ export const Input = ({
       <label htmlFor={name}>{label}</label>
       <br />
       <input
+        style={{ width }}
         type={type}
         id={name}
         name={name}

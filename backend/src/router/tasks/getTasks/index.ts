@@ -2,6 +2,7 @@ import { trpc } from '../../../lib/trpc'
 import { zGetTasksTrpcInput } from './input'
 
 export const getTasksTrpcRoute = trpc.procedure.input(zGetTasksTrpcInput).query(async ({ ctx, input }) => {
+  // const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, '&') : undefined
   const rawTasks = await ctx.prisma.task.findMany({
     select: {
       id: true,
@@ -14,6 +15,24 @@ export const getTasksTrpcRoute = trpc.procedure.input(zGetTasksTrpcInput).query(
         },
       },
     },
+    where: !input.search
+      ? undefined
+      : {
+          OR: [
+            {
+              title: {
+                contains: input.search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              description: {
+                contains: input.search,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
     orderBy: [
       {
         createdAt: 'desc',
