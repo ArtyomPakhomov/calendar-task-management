@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
     "types": "tsc --noEmit --project ./tsconfig.json",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
     "prettify": "prettier --loglevel warn --cache --write '{src/**/*,*}.{ts,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'",
     "pmd": "prisma migrate dev",
     "pgc": "prisma generate",

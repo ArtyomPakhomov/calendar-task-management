@@ -4,6 +4,7 @@ import { useMe } from '../../lib/ctx'
 import * as routes from '../../lib/routes'
 import css from './index.module.scss'
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const layoutContentElRef = createRef<HTMLDivElement>()
 
 export const Layout = () => {
