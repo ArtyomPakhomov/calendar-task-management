@@ -57,6 +57,9 @@ type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | u
 
   showLoaderOnFetching?: boolean
 
+  title: string | ((titleProps: HelperProps<TQueryResult> & TProps) => string)
+  isTitleExact?: boolean
+
   useQuery?: () => TQueryResult
   setProps?: (setPropsProps: SetPropsProps<TQueryResult>) => TProps
   Page: React.FC<TProps>
@@ -74,6 +77,8 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
   checkExistsTitle = 'Not Found',
   checkExistsMessage = 'This page does not exist',
   showLoaderOnFetching = true,
+  title,
+  isTitleExact = false,
   useQuery,
   setProps,
   Page,
@@ -135,7 +140,16 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
       checkAccess: checkAccessFn,
       getAuthorizedMe,
     }) as TProps
-    return <Page {...props} />
+
+    // const calculatedTitil = typeof title === 'function' ? title({ ...helperProps, ...props }) : title
+    const calculatedTitil = typeof title === 'function' ? title({ ...helperProps, ...props }) : title
+    const exactTitle = isTitleExact ? calculatedTitil : `CTM - ${calculatedTitil}`
+    return (
+      <>
+        <title>{exactTitle}</title>
+        <Page {...props} />
+      </>
+    )
   } catch (error) {
     if (error instanceof CheckExistsError) {
       return <ErrorPageComponent title={checkExistsTitle} message={error.message || checkExistsMessage} />

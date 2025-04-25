@@ -12,6 +12,7 @@ import { queryClient, trpc } from '../../../lib/trpc'
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,
+  title: 'Sign In',
 })(() => {
   const navigate = useNavigate()
   const useTrpc = trpc.useTRPC()

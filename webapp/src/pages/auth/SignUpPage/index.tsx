@@ -12,6 +12,7 @@ import { getAllTasksRoute } from '../../../lib/routes'
 import { queryClient, trpc } from '../../../lib/trpc'
 export const SignUpPage = withPageWrapper({
   redirectAuthorized: true,
+  title: 'Sign Up',
 })(() => {
   const navigate = useNavigate()
   const useTrpc = trpc.useTRPC()

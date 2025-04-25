@@ -10,6 +10,7 @@ import { trpc } from '../../../lib/trpc'
 
 export const NewTaskPage = withPageWrapper({
   authorizedOnly: true,
+  title: 'New Task',
 })(() => {
   const useTrpc = trpc.useTRPC()
   const createTask = useMutation(useTrpc.createTask.mutationOptions())

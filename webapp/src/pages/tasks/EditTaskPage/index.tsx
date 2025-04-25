@@ -25,6 +25,7 @@ export const EditTaskPage = withPageWrapper({
     checkAccess(canEditTask(ctx.me, task), 'An task can only be edited by the author')
     return { task }
   },
+  title: ({ task }) => `Edit: ${task.title}`,
 })(({ task }) => {
   const navigate = useNavigate()
   const useTrpc = trpc.useTRPC()

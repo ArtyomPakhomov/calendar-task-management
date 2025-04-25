@@ -42,6 +42,7 @@ export const ViewTaskPage = withPageWrapper({
     me: getAuthorizedMe(),
     task: checkExists(queryResult.data.task, 'Task not found'),
   }),
+  title: ({ task }) => task.title,
 })(({ task, me }) => {
   return (
     <div>

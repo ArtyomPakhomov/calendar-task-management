@@ -7,10 +7,14 @@ import { Input } from '../../../components/Input'
 import { layoutContentElRef } from '../../../components/Layout'
 import { Loader } from '../../../components/Loader'
 import { useForm } from '../../../lib/form'
+import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getViewTasksRoute } from '../../../lib/routes'
 import { trpc, trpcClient } from '../../../lib/trpc'
 import css from './index.module.scss'
-export const AllTasksPage = () => {
+export const AllTasksPage = withPageWrapper({
+  title: 'Calendar Task Management',
+  isTitleExact: true,
+})(() => {
   const { formik } = useForm({
     initialValues: { search: '' },
     validationSchema: zGetTasksTrpcInput.pick({ search: true }),
@@ -70,4 +74,4 @@ export const AllTasksPage = () => {
       )}
     </div>
   )
-}
+})
