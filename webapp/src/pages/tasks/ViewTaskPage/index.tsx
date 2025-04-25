@@ -1,10 +1,32 @@
-import { useQuery } from '@tanstack/react-query'
+import { canBlockTask, canEditTask } from '@calendar-task-management/backend/src/utils/can'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns/format'
 import { Link, useParams } from 'react-router'
+import { Alert } from '../../../components/Alert'
+import { Button } from '../../../components/Button'
+import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getEditTaskRoute, type ViewTaskRouteParams } from '../../../lib/routes'
-import { trpc } from '../../../lib/trpc'
+import { queryClient, trpc } from '../../../lib/trpc'
 import { LikeButton } from './LikeButton'
+import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
+
+const BlockTask = ({ task }: { task: NonNullable<TrpcRouterOutput['getTask']['task']> }) => {
+  const useTrpc = trpc.useTRPC()
+  const blockTask = useMutation(useTrpc.blockTask.mutationOptions())
+  const { alertProps, buttonProps, formik } = useForm({
+    onSubmit: async () => {
+      await blockTask.mutateAsync({ taskId: task.id })
+      await queryClient.refetchQueries(useTrpc.getTask.queryOptions({ taskId: task.id }))
+    },
+  })
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <Alert {...alertProps} />
+      <Button type="submit" children="Block task" color="red" {...buttonProps} />
+    </form>
+  )
+}
 
 export const ViewTaskPage = withPageWrapper({
   showLoaderOnFetching: false,
@@ -39,13 +61,15 @@ export const ViewTaskPage = withPageWrapper({
           </>
         )}
       </div>
-      {me.id === task.authorId && (
+      {canEditTask(me, task) && (
         <div>
           <Link to={getEditTaskRoute({ id: task.id })}>Edit Task</Link>
           <br />
+
           {/* <button href={`/delete-task/${task.id}`}>Delete</button> */}
         </div>
       )}
+      {canBlockTask(me) && <BlockTask task={task} />}
     </div>
   )
 })

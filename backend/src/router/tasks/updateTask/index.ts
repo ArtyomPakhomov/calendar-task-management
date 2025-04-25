@@ -1,4 +1,5 @@
 import { trpc } from '../../../lib/trpc'
+import { canEditTask } from '../../../utils/can'
 import { zUpdateTaskTrpcInput } from './input'
 
 export const updateTaskTrpcRoute = trpc.procedure.input(zUpdateTaskTrpcInput).mutation(async ({ ctx, input }) => {
@@ -13,7 +14,7 @@ export const updateTaskTrpcRoute = trpc.procedure.input(zUpdateTaskTrpcInput).mu
   if (!task) {
     throw new Error('TASK_NOT_FOUND')
   }
-  if (task.authorId !== ctx.me.id) {
+  if (!canEditTask(ctx.me, task)) {
     throw new Error('NOT_YUOR_TASK')
   }
   if (task.title !== input.title) {

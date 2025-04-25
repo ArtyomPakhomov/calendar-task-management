@@ -31,6 +31,7 @@ export const trpcClient = createTRPCClient<TrpcRouter>({
     }),
   ],
 })
+
 export const TrpcProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>

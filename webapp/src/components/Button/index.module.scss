@@ -4,6 +4,8 @@
 .button {
   position: relative;
   padding: 5px;
+  color: vars.$white;
+  font-weight: bold;
 }
 
 .loading {
@@ -12,4 +14,12 @@
   .text {
     opacity: 0;
   }
+}
+
+.color-red {
+  background-color: vars.$red;
+}
+
+.color-green {
+  background-color: vars.$green;
 }

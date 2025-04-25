@@ -5,6 +5,7 @@ import { signInTrpcRoute } from './auth/signIn'
 import { signUpTrpcRoute } from './auth/signUp'
 import { updatePasswordTrpcRoute } from './auth/updatePassword'
 import { updateProfileTrpcRoute } from './auth/updateProfile'
+import { blockTaskTrpcRoute } from './tasks/blockTask'
 import { createTaskTrpcRoute } from './tasks/createTask'
 import { getTaskTrpcRoute } from './tasks/getTask'
 import { getTasksTrpcRoute } from './tasks/getTasks'
@@ -20,6 +21,7 @@ export const trpcRouter = trpc.router({
   signUp: signUpTrpcRoute,
   updatePassword: updatePasswordTrpcRoute,
   updateProfile: updateProfileTrpcRoute,
+  blockTask: blockTaskTrpcRoute,
   createTask: createTaskTrpcRoute,
   getTask: getTaskTrpcRoute,
   getTasks: getTasksTrpcRoute,
@@ -37,6 +39,7 @@ export type TrpcRouterOutput = inferRouterOutputs<TrpcRouter>
 //{"path":"./auth/signUp/index","name":"index","ext":".ts"}
 //{"path":"./auth/updatePassword/index","name":"index","ext":".ts"}
 //{"path":"./auth/updateProfile/index","name":"index","ext":".ts"}
+//{"path":"./tasks/blockTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/createTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTask/index","name":"index","ext":".ts"}
 //{"path":"./tasks/getTasks/index","name":"index","ext":".ts"}

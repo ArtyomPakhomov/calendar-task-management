@@ -30,6 +30,9 @@ export const getTaskTrpcRoute = trpc.procedure.input(zGetTaskTrpcInput).query(as
       },
     },
   })
+  if (rawTask?.blockedAt) {
+    throw new Error('Task is blocked by administrator')
+  }
   const isLikedByMe = !!rawTask?.tasksLikes.length // true or false
   const likesCount = rawTask?._count.tasksLikes || 0
 

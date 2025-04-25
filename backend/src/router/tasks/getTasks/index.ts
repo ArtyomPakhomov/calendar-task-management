@@ -15,24 +15,27 @@ export const getTasksTrpcRoute = trpc.procedure.input(zGetTasksTrpcInput).query(
         },
       },
     },
-    where: !input.search
-      ? undefined
-      : {
-          OR: [
-            {
-              title: {
-                contains: input.search,
-                mode: 'insensitive',
+    where: {
+      blockedAt: null,
+      ...(!input.search
+        ? {}
+        : {
+            OR: [
+              {
+                title: {
+                  contains: input.search,
+                  mode: 'insensitive',
+                },
               },
-            },
-            {
-              description: {
-                contains: input.search,
-                mode: 'insensitive',
+              {
+                description: {
+                  contains: input.search,
+                  mode: 'insensitive',
+                },
               },
-            },
-          ],
-        },
+            ],
+          }),
+    },
     orderBy: [
       {
         createdAt: 'desc',

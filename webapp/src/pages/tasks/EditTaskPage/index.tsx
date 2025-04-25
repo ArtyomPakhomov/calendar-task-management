@@ -1,4 +1,5 @@
 import { zUpdateTaskTrpcInput } from '@calendar-task-management/backend/src/router/tasks/updateTask/input'
+import { canEditTask } from '@calendar-task-management/backend/src/utils/can'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router'
 import { Alert } from '../../../components/Alert'
@@ -21,7 +22,7 @@ export const EditTaskPage = withPageWrapper({
 
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const task = checkExists(queryResult.data.task, 'Task not found')
-    checkAccess(ctx.me && ctx.me.id === task.authorId, 'An task can only be edited by the author')
+    checkAccess(canEditTask(ctx.me, task), 'An task can only be edited by the author')
     return { task }
   },
 })(({ task }) => {
