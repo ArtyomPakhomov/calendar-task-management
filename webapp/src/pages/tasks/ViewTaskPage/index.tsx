@@ -54,13 +54,8 @@ export const ViewTaskPage = withPageWrapper({
       </small>
       <p>{task.description}</p>
       <div>
-        Likes: {task.likesCount}
-        {me && (
-          <>
-            <br />
-            <LikeButton task={task} />
-          </>
-        )}
+        <span style={{ marginRight: '10px' }}>Likes: {task.likesCount}</span>
+        {me && <LikeButton task={task} />}
       </div>
       {canEditTask(me, task) && (
         <div>

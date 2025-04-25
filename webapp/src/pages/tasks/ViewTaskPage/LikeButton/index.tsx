@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+import { Icon } from '../../../../components/icon'
 import { queryClient, trpc } from '../../../../lib/trpc'
 import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
 
@@ -35,7 +36,7 @@ export const LikeButton = ({ task }: { task: NonNullable<TrpcRouterOutput['getTa
         })
       }}
     >
-      {task.isLikedByMe ? 'Unlike' : 'Like'}
+      <Icon size={32} name={task.isLikedByMe ? 'heartFilled' : 'heartEmpty'} />
     </button>
   )
 }
