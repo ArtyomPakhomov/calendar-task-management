@@ -1,5 +1,6 @@
 import { createRef } from 'react'
 import { Link, Outlet } from 'react-router'
+import Logo from '../../assets/images/logo.svg?react'
 import { useMe } from '../../lib/ctx'
 import * as routes from '../../lib/routes'
 import css from './index.module.scss'
@@ -13,7 +14,7 @@ export const Layout = () => {
   return (
     <div className={css.layout}>
       <nav className={css.navigation}>
-        <h1 className={css.logo}>Calendar Task Management</h1>
+        <Logo className={css.logo} />
         <ul className={css.menu}>
           <li className={css.item}>
             <Link to={routes.getAllTasksRoute()}>All Tasks</Link>

@@ -36,7 +36,7 @@ export const LikeButton = ({ task }: { task: NonNullable<TrpcRouterOutput['getTa
         })
       }}
     >
-      <Icon size={32} name={task.isLikedByMe ? 'heartFilled' : 'heartEmpty'} />
+      <Icon size={16} name={task.isLikedByMe ? 'heartFilled' : 'heartEmpty'} />
     </button>
   )
 }

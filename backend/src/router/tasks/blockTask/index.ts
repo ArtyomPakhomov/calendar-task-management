@@ -1,3 +1,4 @@
+import { sendTaskBlockedEmail } from '../../../lib/emails'
 import { trpc } from '../../../lib/trpc'
 import { canBlockTask } from '../../../utils/can'
 import { zBlockTaskTrpcInput } from './input'
@@ -12,7 +13,11 @@ export const blockTaskTrpcRoute = trpc.procedure.input(zBlockTaskTrpcInput).muta
     where: {
       id: taskId,
     },
+    include: {
+      author: true,
+    },
   })
+
   if (!task) {
     throw new Error('TASK_NOT_FOUND')
   }
@@ -24,5 +29,6 @@ export const blockTaskTrpcRoute = trpc.procedure.input(zBlockTaskTrpcInput).muta
       blockedAt: new Date(),
     },
   })
+  void sendTaskBlockedEmail({ user: task.author, task })
   return true
 })
