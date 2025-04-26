@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
+import { getNewTasksRoute } from '@calendar-task-management/webapp/src/lib/routes'
 import { type Task, type User } from '@prisma/client'
 import fg from 'fast-glob'
 import Handlebars from 'handlebars'
@@ -48,7 +49,7 @@ const sendEmail = async ({
       to,
       templateName,
       templateVariables,
-      html,
+      // html,
       response: loggableResponse,
     })
     return { ok: true }
@@ -65,7 +66,7 @@ export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'name' | 'em
     templateName: 'welcome',
     templateVariables: {
       userName: user.name,
-      addTaskUrl: `${env.WEBAPP_URL}/tasks/new`,
+      addTaskUrl: `${env.WEBAPP_URL}${getNewTasksRoute()}`,
     },
   })
 }

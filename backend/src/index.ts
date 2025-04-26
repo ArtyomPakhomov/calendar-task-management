@@ -13,10 +13,10 @@ void (async () => {
     ctx = createAppContext()
     await presetDb(ctx)
     const expressApp = express()
-
     expressApp.use(cors())
+
     applyPassportToExpressApp(expressApp, ctx)
-    applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
+    await applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
 
     expressApp.listen(env.PORT, () => {
       console.info(`Listening at http://localhost:${env.PORT}`)
