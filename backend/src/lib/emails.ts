@@ -66,11 +66,10 @@ export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'name' | 'em
     templateName: 'welcome',
     templateVariables: {
       userName: user.name,
-      addTaskUrl: `${env.WEBAPP_URL}${getNewTasksRoute()}`,
+      addTaskUrl: `${getNewTasksRoute({ abs: true })}`,
     },
   })
 }
-
 export const sendTaskBlockedEmail = async ({
   user,
   task,

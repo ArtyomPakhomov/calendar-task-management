@@ -1,12 +1,12 @@
 import { canBlockTask, canEditTask } from '@calendar-task-management/backend/src/utils/can'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns/format'
-import { Link, useParams } from 'react-router'
+import { Link } from 'react-router'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
-import { getEditTaskRoute, type ViewTaskRouteParams } from '../../../lib/routes'
+import { getEditTaskRoute, getViewTasksRoute } from '../../../lib/routes'
 import { queryClient, trpc } from '../../../lib/trpc'
 import { LikeButton } from './LikeButton'
 import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/router'
@@ -31,7 +31,8 @@ const BlockTask = ({ task }: { task: NonNullable<TrpcRouterOutput['getTask']['ta
 export const ViewTaskPage = withPageWrapper({
   showLoaderOnFetching: false,
   useQuery: () => {
-    const { id } = useParams() as ViewTaskRouteParams
+    const { id } = getViewTasksRoute.useParams()
+
     const useTrpc = trpc.useTRPC()
     // const data = queryClient.getQueryData(useTrpc.getTask.queryKey({ taskId: id }))
     // console.info(data)

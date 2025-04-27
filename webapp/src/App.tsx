@@ -13,22 +13,21 @@ import { EditTaskPage } from './pages/tasks/EditTaskPage'
 import { NewTaskPage } from './pages/tasks/NewTaskPage'
 import { ViewTaskPage } from './pages/tasks/ViewTaskPage'
 import './styles/global.scss'
-
 function App() {
   return (
     <TrpcProvider>
       <AppContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
+            <Route path={routes.getSignOutRoute.route} element={<SignOutPage />} />
             <Route element={<Layout />}>
-              <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
-              <Route path={routes.getSignInRoute()} element={<SignInPage />} />
-              <Route path={routes.getEditProfileRoute()} element={<EditProfilePage />} />
-              <Route path={routes.getAllTasksRoute()} element={<AllTasksPage />} />
-              <Route path={routes.getNewTasksRoute()} element={<NewTaskPage />} />
-              <Route path={routes.getEditTaskRoute(routes.editTaskRouteParams)} element={<EditTaskPage />} />
-              <Route path={routes.getViewTasksRoute(routes.viewTaskRouteParams)} element={<ViewTaskPage />} />
+              <Route path={routes.getSignUpRoute.route} element={<SignUpPage />} />
+              <Route path={routes.getSignInRoute.route} element={<SignInPage />} />
+              <Route path={routes.getEditProfileRoute.route} element={<EditProfilePage />} />
+              <Route path={routes.getAllTasksRoute.route} element={<AllTasksPage />} />
+              <Route path={routes.getNewTasksRoute.route} element={<NewTaskPage />} />
+              <Route path={routes.getEditTaskRoute.route} element={<EditTaskPage />} />
+              <Route path={routes.getViewTasksRoute.route} element={<ViewTaskPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

@@ -1,23 +1,17 @@
-const getRouteParams = <T extends Record<string, boolean>>(object: T) => {
-  return Object.keys(object).reduce((acc, key) => ({ ...acc, [key]: `:${key}` }), {}) as Record<keyof T, string>
-} // => { id: true } -> { id: ':id' }
+import { pgr } from '../utils/pumpGetRoute'
 
-export const getAllTasksRoute = () => '/'
+export const getViewTasksRoute = pgr({ id: true }, ({ id }) => `/tasks/${id}`)
 
-export const viewTaskRouteParams = getRouteParams({ id: true }) // => { id: ':id' }
-export type ViewTaskRouteParams = typeof viewTaskRouteParams // => { id: string }
-export const getViewTasksRoute = ({ id }: ViewTaskRouteParams) => `/tasks/${id}`
-// => getViewTasksRoute(viewTaskRouteParams) -> '/tasks/:id'
-// => getViewTasksRoute({ id: task.id }) -> '/tasks/id'
+export const getEditTaskRoute = pgr({ id: true }, ({ id }) => `/tasks/${id}/edit`)
 
-export const getNewTasksRoute = () => '/tasks/new'
+export const getSignUpRoute = pgr(() => '/sign-up')
 
-export const editTaskRouteParams = getRouteParams({ id: true })
-export type EditTaskRouteParams = typeof editTaskRouteParams
-export const getEditTaskRoute = ({ id }: EditTaskRouteParams) => `/tasks/${id}/edit`
+export const getSignInRoute = pgr(() => '/sign-in')
 
-export const getSignUpRoute = () => '/sign-up'
-export const getSignInRoute = () => '/sign-in'
-export const getEditProfileRoute = () => '/edit-profile'
+export const getSignOutRoute = pgr(() => '/sign-out')
 
-export const getSignOutRoute = () => '/sign-out'
+export const getEditProfileRoute = pgr(() => '/edit-profile')
+
+export const getAllTasksRoute = pgr(() => '/')
+
+export const getNewTasksRoute = pgr(() => '/tasks/new')

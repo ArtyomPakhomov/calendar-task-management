@@ -1,20 +1,21 @@
 import { zUpdateTaskTrpcInput } from '@calendar-task-management/backend/src/router/tasks/updateTask/input'
 import { canEditTask } from '@calendar-task-management/backend/src/utils/can'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate } from 'react-router'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
 import { Textarea } from '../../../components/Textarea'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
-import { type EditTaskRouteParams, getViewTasksRoute } from '../../../lib/routes'
+import { getEditTaskRoute, getViewTasksRoute } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 
 export const EditTaskPage = withPageWrapper({
   authorizedOnly: true,
   useQuery: () => {
-    const { id } = useParams() as EditTaskRouteParams
+    // const { id } = useParams() as EditTaskRouteParams
+    const { id } = getEditTaskRoute.useParams()
     const useTrpc = trpc.useTRPC()
     const queryResult = useQuery(useTrpc.getTask.queryOptions({ taskId: id }))
     return queryResult
