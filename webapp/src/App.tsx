@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { Layout } from './components/Layout'
+import { NotAuthRouteTracker } from './components/NotAuthRouteTracker'
 import { AppContextProvider } from './lib/ctx'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
@@ -18,6 +19,7 @@ function App() {
     <TrpcProvider>
       <AppContextProvider>
         <BrowserRouter>
+          <NotAuthRouteTracker />
           <Routes>
             <Route path={routes.getSignOutRoute.route} element={<SignOutPage />} />
             <Route element={<Layout />}>

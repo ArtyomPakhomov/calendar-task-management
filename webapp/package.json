@@ -13,6 +13,7 @@
   "dependencies": {
     "@calendar-task-management/backend": "workspace:*",
     "@calendar-task-management/shared": "workspace:*",
+    "@nanostores/react": "^1.0.0",
     "@tanstack/react-query": "^5.71.10",
     "@trpc/client": "^11.0.2",
     "@trpc/tanstack-react-query": "^11.0.2",
@@ -22,6 +23,7 @@
     "include-media": "^2.0.0",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
+    "nanostores": "^1.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",

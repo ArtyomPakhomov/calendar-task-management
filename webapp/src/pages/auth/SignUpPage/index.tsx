@@ -1,4 +1,5 @@
 import { zSignUpTrpcInput } from '@calendar-task-management/backend/src/router/auth/signUp/input'
+import { useStore } from '@nanostores/react'
 import { useMutation } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router'
@@ -6,14 +7,15 @@ import { z } from 'zod'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
+import { lastVisistedNotAuthRouteStore } from '../../../components/NotAuthRouteTracker'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
-import { getAllTasksRoute } from '../../../lib/routes'
 import { queryClient, trpc } from '../../../lib/trpc'
 export const SignUpPage = withPageWrapper({
   redirectAuthorized: true,
   title: 'Sign Up',
 })(() => {
+  const lastVisistedNotAuthRoute = useStore(lastVisistedNotAuthRouteStore)
   const navigate = useNavigate()
   const useTrpc = trpc.useTRPC()
   const signUp = useMutation(useTrpc.signUp.mutationOptions())
@@ -42,7 +44,7 @@ export const SignUpPage = withPageWrapper({
       const { token } = await signUp.mutateAsync(values)
       Cookies.set('token', token, { expires: 99999 })
       queryClient.invalidateQueries()
-      navigate(getAllTasksRoute())
+      navigate(lastVisistedNotAuthRoute)
     },
     resetOnSuccess: false,
   })

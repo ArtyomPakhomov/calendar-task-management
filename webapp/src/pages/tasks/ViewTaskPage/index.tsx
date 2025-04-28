@@ -39,8 +39,8 @@ export const ViewTaskPage = withPageWrapper({
     const queryResult = useQuery(useTrpc.getTask.queryOptions({ taskId: id }))
     return queryResult
   },
-  setProps: ({ queryResult, checkExists, getAuthorizedMe }) => ({
-    me: getAuthorizedMe(),
+  setProps: ({ queryResult, checkExists, ctx }) => ({
+    me: ctx.me,
     task: checkExists(queryResult.data.task, 'Task not found'),
   }),
   title: ({ task }) => task.title,

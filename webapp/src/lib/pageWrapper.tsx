@@ -1,10 +1,11 @@
+import { useStore } from '@nanostores/react'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
 import { Loader } from '../components/Loader'
+import { lastVisistedNotAuthRouteStore } from '../components/NotAuthRouteTracker'
 import { NotFoundPage } from '../pages/other/NotFoundPage'
 import { type AppContext, useAppContext } from './ctx'
-import { getAllTasksRoute } from './routes'
 import type { QueryObserverBaseResult, QueryObserverSuccessResult } from '@tanstack/react-query'
 
 class GetAuthorizedMeError extends Error {}
@@ -83,6 +84,7 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
   setProps,
   Page,
 }: PageWrapperProps<TProps, TQueryResult>) => {
+  const lastVisistedNotAuthRoute = useStore(lastVisistedNotAuthRouteStore)
   const navigate = useNavigate()
   const ctx = useAppContext()
   const queryResult = useQuery?.()
@@ -91,9 +93,9 @@ const PageWrapper = <TProps extends Props, TQueryResult extends QueryResult | un
 
   useEffect(() => {
     if (redirectNeeded) {
-      navigate(getAllTasksRoute(), { replace: true })
+      navigate(lastVisistedNotAuthRoute, { replace: true })
     }
-  }, [redirectNeeded, navigate])
+  }, [redirectNeeded, navigate, lastVisistedNotAuthRoute])
 
   if (
     queryResult?.isPending ||
