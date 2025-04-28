@@ -1,8 +1,8 @@
-import { trpc } from '../../../lib/trpc'
+import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { canEditTask } from '../../../utils/can'
 import { zUpdateTaskTrpcInput } from './input'
 
-export const updateTaskTrpcRoute = trpc.procedure.input(zUpdateTaskTrpcInput).mutation(async ({ ctx, input }) => {
+export const updateTaskTrpcRoute = trpcLoggedProcedure.input(zUpdateTaskTrpcInput).mutation(async ({ ctx, input }) => {
   if (!ctx.me) {
     throw new Error('UNAUTHORIZED')
   }

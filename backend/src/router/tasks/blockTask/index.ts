@@ -1,9 +1,8 @@
-import { sendTaskBlockedEmail } from '../../../lib/emails'
-import { trpc } from '../../../lib/trpc'
+import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { canBlockTask } from '../../../utils/can'
 import { zBlockTaskTrpcInput } from './input'
 
-export const blockTaskTrpcRoute = trpc.procedure.input(zBlockTaskTrpcInput).mutation(async ({ input, ctx }) => {
+export const blockTaskTrpcRoute = trpcLoggedProcedure.input(zBlockTaskTrpcInput).mutation(async ({ input, ctx }) => {
   const { taskId } = input
 
   if (!canBlockTask(ctx.me)) {
@@ -29,6 +28,6 @@ export const blockTaskTrpcRoute = trpc.procedure.input(zBlockTaskTrpcInput).muta
       blockedAt: new Date(),
     },
   })
-  void sendTaskBlockedEmail({ user: task.author, task })
+  // void sendTaskBlockedEmail({ user: task.author, task })
   return true
 })

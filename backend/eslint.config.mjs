@@ -12,5 +12,13 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-  rules: {},
+  rules: {
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: '[object.name=console]',
+        message: 'Indtead, use: import { logger } from "lib/logger"',
+      },
+    ],
+  },
 })

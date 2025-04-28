@@ -51,8 +51,8 @@ export default tseslint.config(
           ],
         },
       ],
-      'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
       'no-duplicate-imports': ['error', { includeExports: true }],
+      '@typescript-eslint/no-unsafe-function-type': 'off',
     },
   }
 )

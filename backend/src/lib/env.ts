@@ -14,6 +14,8 @@ const zEnv = z.object({
   RUSENDER_API_KEY: z.string().trim().min(1),
   FROM_EMAIL_NAME: z.string().trim().min(1),
   FROM_EMAIL_ADDRESS: z.string().trim().min(1),
+  HOST_ENV: z.enum(['local', 'production']),
+  DEBUG: z.string().trim().min(1),
 })
 
 // eslint-disable-next-line node/no-process-env

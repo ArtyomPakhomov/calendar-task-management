@@ -6,6 +6,7 @@ import fg from 'fast-glob'
 import Handlebars from 'handlebars'
 import _ from 'lodash'
 import { env } from './env'
+import { logger } from './logger'
 import { sendEmailThroughRusender } from './rusender'
 
 const getHbrTemplates = _.memoize(async () => {
@@ -45,16 +46,20 @@ const sendEmail = async ({
     }
     const html = await getEmailHtml(templateName, fullTemplateVaraibles)
     const { loggableResponse } = await sendEmailThroughRusender({ to, html, subject })
-    console.info('sendEmail', {
-      to,
-      templateName,
-      templateVariables,
-      // html,
-      response: loggableResponse,
+    logger.info({
+      logType: 'email',
+      message: 'sendEmail',
+      meta: {
+        to,
+        templateName,
+        templateVariables,
+        // html,
+        response: loggableResponse,
+      },
     })
     return { ok: true }
   } catch (error) {
-    console.error(error)
+    logger.error({ logType: 'email', error, meta: { to, templateName, templateVariables } })
     return { ok: false }
   }
 }

@@ -1,4 +1,4 @@
-import { trpc } from '../lib/trpc'
+import { createTrpcRouter } from '../lib/trpc'
 // @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TrpcRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
 import { getMeTrpcRoute } from './auth/getMe'
 import { signInTrpcRoute } from './auth/signIn'
@@ -14,7 +14,7 @@ import { updateTaskTrpcRoute } from './tasks/updateTask'
 // @endindex
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 
-export const trpcRouter = trpc.router({
+export const trpcRouter = createTrpcRouter({
   // @index('./**/index.ts', f => `${f.path.split('/').slice(0, -1).pop()}: ${f.path.split('/').slice(0, -1).pop()}TrpcRoute,`)
   getMe: getMeTrpcRoute,
   signIn: signInTrpcRoute,

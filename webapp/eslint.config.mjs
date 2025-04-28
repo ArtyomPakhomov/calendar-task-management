@@ -20,6 +20,7 @@ export default tseslint.config({
   },
   rules: {
     ...reactHooks.configs.recommended.rules,
+    'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-restricted-imports': [
       'error',

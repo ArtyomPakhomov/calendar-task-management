@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import { trpc } from '../../../lib/trpc'
+import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zGetTaskTrpcInput } from './input'
 
-export const getTaskTrpcRoute = trpc.procedure.input(zGetTaskTrpcInput).query(async ({ ctx, input }) => {
+export const getTaskTrpcRoute = trpcLoggedProcedure.input(zGetTaskTrpcInput).query(async ({ ctx, input }) => {
   const rawTask = await ctx.prisma.task.findUnique({
     where: {
       id: input.taskId,
