@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@calendar-task-management/webapp": "workspace:*",
+    "@calendar-task-management/shared": "workspace:*",
     "@prisma/client": "^6.6.0",
     "@trpc/server": "^11.0.2",
     "axios": "^1.9.0",

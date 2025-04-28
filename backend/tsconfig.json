@@ -6,7 +6,8 @@
   "compilerOptions": {
     "plugins": [{ "transform": "typescript-transform-paths" }],
     "paths": {
-      "@calendar-task-management/webapp/*": ["../webapp/*"]
+      "@calendar-task-management/webapp/*": ["../webapp/*"],
+      "@calendar-task-management/shared/*": ["../shared/*"]
     },
     "outDir": "./dist",
     "allowJs": true,

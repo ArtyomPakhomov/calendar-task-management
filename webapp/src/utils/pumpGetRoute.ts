@@ -1,6 +1,7 @@
 import { useParams as useReactRouterParams } from 'react-router'
 
-const baseUrl = 'http://localhost:8000'
+// eslint-disable-next-line node/no-process-env
+const baseUrl = process.env.VITE_WEBAPP_URL || process.env.WEBAPP_URL
 
 type PumpedGetRouteParamsBase = {
   abs?: boolean
@@ -29,7 +30,6 @@ function pumpGetRoute(routeParamsOrGetRoute?: any, maybeGetRoute?: any) {
   const route = getRoute(routeParams)
 
   const pumpedGetRoute = (params?: PumpedGetRouteParamsBase) => {
-    console.info(params)
     const route = getRoute(params)
     if (params?.abs) {
       return `${baseUrl}${route}`

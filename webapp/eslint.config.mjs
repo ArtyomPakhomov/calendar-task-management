@@ -31,7 +31,6 @@ export default tseslint.config({
               '!@calendar-task-management/backend/**/',
               '!@calendar-task-management/backend/**/input',
               '!@calendar-task-management/backend/src/utils/can',
-              // '!@calendar-task-management/backend/**/router',
             ],
             allowTypeImports: true,
             message: 'Only types and input schemas are allowed to be imported from backend workspace',

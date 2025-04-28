@@ -6,10 +6,11 @@
   "scripts": {
     "b": "pnpm --filter @calendar-task-management/backend",
     "w": "pnpm --filter @calendar-task-management/webapp",
+    "sh": "pnpm --filter @alendar-task-management/shared",
     "dev": "pnpm -r --parallel dev",
     "prettify": "pnpm -r --parallel prettify",
-    "lint": "concurrently 'pnpm b lint' 'pnpm w lint'",
-    "types": "concurrently 'pnpm b types' 'pnpm w types'",
+    "types": "concurrently 'pnpm b types' 'pnpm w types' 'pnpm sh types'",
+    "lint": "concurrently 'pnpm b lint' 'pnpm w lint' 'pnpm sh lint'",
     "prepare": "husky"
   },
   "devDependencies": {
