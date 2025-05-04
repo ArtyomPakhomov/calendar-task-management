@@ -1,3 +1,4 @@
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { canEditTask } from '../../../utils/can'
 import { zUpdateTaskTrpcInput } from './input'
@@ -24,7 +25,7 @@ export const updateTaskTrpcRoute = trpcLoggedProcedure.input(zUpdateTaskTrpcInpu
       },
     })
     if (existingTask) {
-      throw new Error('Task with this title already exists')
+      throw new ExpectedError('Task with this title already exists')
     }
   }
   await ctx.prisma.task.update({

@@ -1,3 +1,4 @@
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zCreateTaskTrpcInput } from './input'
 
@@ -11,7 +12,7 @@ export const createTaskTrpcRoute = trpcLoggedProcedure.input(zCreateTaskTrpcInpu
     },
   })
   if (exTask) {
-    throw new Error('Task already exists')
+    throw new ExpectedError('Task already exists')
   }
   const task = await ctx.prisma.task.create({
     data: { ...input, authorId: ctx.me.id },

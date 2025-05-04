@@ -1,3 +1,4 @@
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { getPasswordHash } from '../../../utils/getPasswordHash'
 import { signJWT } from '../../../utils/signJWT'
@@ -12,7 +13,7 @@ export const signInTrpcRoute = trpcLoggedProcedure.input(zSignInTrpcInput).mutat
   })
 
   if (!user) {
-    throw new Error('Worng email or password')
+    throw new ExpectedError('Worng email or password')
   }
 
   const token = signJWT(user.id)

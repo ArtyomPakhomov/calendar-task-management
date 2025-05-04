@@ -1,3 +1,4 @@
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { getPasswordHash } from '../../../utils/getPasswordHash'
 import { signJWT } from '../../../utils/signJWT'
@@ -10,7 +11,7 @@ export const signUpTrpcRoute = trpcLoggedProcedure.input(zSignUpTrpcInput).mutat
     },
   })
   if (exUser) {
-    throw new Error('User already exists')
+    throw new ExpectedError('User already exists')
   }
   const user = await ctx.prisma.user.create({
     data: {

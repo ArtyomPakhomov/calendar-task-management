@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zGetTaskTrpcInput } from './input'
 
@@ -31,7 +32,7 @@ export const getTaskTrpcRoute = trpcLoggedProcedure.input(zGetTaskTrpcInput).que
     },
   })
   if (rawTask?.blockedAt) {
-    throw new Error('Task is blocked by administrator')
+    throw new ExpectedError('Task is blocked by administrator')
   }
   const isLikedByMe = !!rawTask?.tasksLikes.length // true or false
   const likesCount = rawTask?._count.tasksLikes || 0

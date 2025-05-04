@@ -12,10 +12,6 @@ import type { TrpcRouterOutput } from '@calendar-task-management/backend/src/rou
 
 const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) => {
   const useTrpc = trpc.useTRPC()
-  console.info(useTrpc.getMe.queryKey())
-
-  //   const data = queryClient.getQueryData(useTrpc.getMe.queryKey())
-  //   console.info(data)
 
   const updateProfile = useMutation(useTrpc.updateProfile.mutationOptions())
   const { formik, alertProps, buttonProps } = useForm({
@@ -25,6 +21,7 @@ const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) =
     },
     validationSchema: zUpdateProfileTrpcInput,
     onSubmit: async (values) => {
+      throw new Error('Test error2')
       const updatedMe = await updateProfile.mutateAsync(values)
       queryClient.setQueryData(useTrpc.getMe.queryKey(), { me: updatedMe })
     },

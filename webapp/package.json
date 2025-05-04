@@ -13,9 +13,13 @@
   "dependencies": {
     "@calendar-task-management/backend": "workspace:*",
     "@calendar-task-management/shared": "workspace:*",
+    "@hawk.so/javascript": "^3.2.4",
     "@nanostores/react": "^1.0.0",
+    "@sentry/browser": "^9.15.0",
+    "@sentry/react": "^9.15.0",
     "@tanstack/react-query": "^5.71.10",
     "@trpc/client": "^11.0.2",
+    "@trpc/server": "^11.0.2",
     "@trpc/tanstack-react-query": "^11.0.2",
     "date-fns": "^4.1.0",
     "formik": "^2.4.6",
@@ -35,6 +39,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^3.3.1",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.16",
     "@types/react": "^19.0.10",

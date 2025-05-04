@@ -1,6 +1,8 @@
+import { TRPCClientError } from '@trpc/client'
 import { type FormikHelpers, useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useMemo, useState } from 'react'
+import { sentryCaptureException } from './sentry'
 import type { AlertProps } from '../components/Alert'
 import type { ButtonProps } from '../components/Button'
 import type { z } from 'zod'
@@ -41,6 +43,9 @@ export const useForm = <TZodSchema extends z.ZodTypeAny>({
           }, 3000)
         }
       } catch (error: any) {
+        if (!(error instanceof TRPCClientError)) {
+          sentryCaptureException(error)
+        }
         setSubmittingError(error)
       }
     },

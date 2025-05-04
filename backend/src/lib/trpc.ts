@@ -5,6 +5,7 @@ import { type Express, type Request } from 'express'
 import SuperJSON from 'superjson'
 import { type TrpcRouter } from '../router'
 import { type AppContext } from './ctx'
+import { ExpectedError } from './error'
 import { logger } from './logger'
 
 export type ExpressRequest = Request & {
@@ -23,6 +24,15 @@ const getCreateTrpcContext =
 type TrpcContext = ReturnType<typeof getCreateTrpcContext> // TODOO: fix this!
 const trpc = initTRPC.context<TrpcContext>().create({
   transformer: SuperJSON,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        isExpected: error.cause instanceof ExpectedError,
+      },
+    }
+  },
 })
 
 export const createTrpcRouter = trpc.router

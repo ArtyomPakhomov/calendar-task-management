@@ -34,8 +34,6 @@ export const ViewTaskPage = withPageWrapper({
     const { id } = getViewTasksRoute.useParams()
 
     const useTrpc = trpc.useTRPC()
-    // const data = queryClient.getQueryData(useTrpc.getTask.queryKey({ taskId: id }))
-    // console.info(data)
     const queryResult = useQuery(useTrpc.getTask.queryOptions({ taskId: id }))
     return queryResult
   },

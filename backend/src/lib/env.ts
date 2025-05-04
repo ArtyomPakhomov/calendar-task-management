@@ -16,6 +16,8 @@ const zEnv = z.object({
   FROM_EMAIL_ADDRESS: z.string().trim().min(1),
   HOST_ENV: z.enum(['local', 'production']),
   DEBUG: z.string().trim().min(1),
+  BACKEND_SENTRY_DSN: z.string().trim().min(1),
+  SOURCE_VERSION: z.string().trim().min(1),
 })
 
 // eslint-disable-next-line node/no-process-env
