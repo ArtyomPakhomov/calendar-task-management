@@ -1,4 +1,4 @@
-import baseConfig from '../eslint.config.js'
+import baseConfig from '../eslint.config.mjs'
 import reactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
 import reactRefresh from 'eslint-plugin-react-refresh'

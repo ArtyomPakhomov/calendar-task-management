@@ -1,6 +1,7 @@
 import tseslint from 'typescript-eslint'
 import node from 'eslint-plugin-node'
 import importPlugin from 'eslint-plugin-import'
+import jestPlugin from 'eslint-plugin-jest'
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules'] },
@@ -16,6 +17,7 @@ export default tseslint.config(
     plugins: {
       import: importPlugin,
       node,
+      jest: jestPlugin,
     },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
@@ -54,5 +56,10 @@ export default tseslint.config(
       'no-duplicate-imports': ['error', { includeExports: true }],
       '@typescript-eslint/no-unsafe-function-type': 'off',
     },
+  },
+  {
+    // enable jest rules on test files
+    files: ['**/*.test.ts'],
+    extends: [jestPlugin.configs['flat/recommended']],
   }
 )

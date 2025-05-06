@@ -10,7 +10,7 @@ import * as yaml from 'yaml'
 import { deepMap } from '../utils/deepMap'
 import { env } from './env'
 import { ExpectedError } from './error'
-import { sentryCaptureException } from './setry'
+// import { sentryCaptureException } from './setry'
 export const winstonLogger = winston.createLogger({
   level: 'debug',
   format: winston.format.combine(
@@ -83,7 +83,7 @@ export const logger = {
     const isTrpcExpectedError = props.error instanceof TRPCError && props.error.cause instanceof ExpectedError
     const prettifiedMetaData = prettifyMeta(props.meta)
     if (!isNativeExpectedError && !isTrpcExpectedError) {
-      sentryCaptureException(props.error, prettifiedMetaData)
+      // sentryCaptureException(props.error, prettifiedMetaData)
     }
     if (!debug.enabled(`ctm:${props.logType}`)) {
       return

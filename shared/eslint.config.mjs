@@ -1,4 +1,4 @@
-import baseConfig from '../eslint.config.js'
+import baseConfig from '../eslint.config.mjs'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 

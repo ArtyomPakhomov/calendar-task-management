@@ -2,7 +2,7 @@ import { type User } from '@prisma/client'
 import { initTRPC } from '@trpc/server'
 import * as trpcExpress from '@trpc/server/adapters/express'
 import { type Express, type Request } from 'express'
-import SuperJSON from 'superjson'
+import superjson from 'superjson'
 import { type TrpcRouter } from '../router'
 import { type AppContext } from './ctx'
 import { ExpectedError } from './error'
@@ -12,18 +12,19 @@ export type ExpressRequest = Request & {
   user: User | undefined
 }
 
+export const getTrpcContext = ({ appContext, req }: { appContext: AppContext; req: ExpressRequest }) => ({
+  ...appContext,
+  me: req.user || null,
+})
+
 const getCreateTrpcContext =
   (appContext: AppContext) =>
-  ({ req }: trpcExpress.CreateExpressContextOptions) => {
-    return {
-      ...appContext,
-      me: (req as ExpressRequest).user || null,
-    }
-  }
+  ({ req }: trpcExpress.CreateExpressContextOptions) =>
+    getTrpcContext({ appContext, req: req as ExpressRequest })
 
 type TrpcContext = ReturnType<typeof getCreateTrpcContext> // TODOO: fix this!
 const trpc = initTRPC.context<TrpcContext>().create({
-  transformer: SuperJSON,
+  transformer: superjson,
   errorFormatter({ shape, error }) {
     return {
       ...shape,
