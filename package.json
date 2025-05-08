@@ -19,6 +19,7 @@
     "@types/node": "^22.13.16",
     "concurrently": "^9.1.2",
     "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
     "eslint": "^9.23.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.11.0",

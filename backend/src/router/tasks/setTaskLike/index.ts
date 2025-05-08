@@ -1,11 +1,12 @@
+import { sentryCaptureException } from '../../../lib/sentry'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zSetTaskLikeTrpcInput } from './input'
 
 export const setTaskLikeTrpcRoute = trpcLoggedProcedure
   .input(zSetTaskLikeTrpcInput)
   .mutation(async ({ input, ctx }) => {
+    sentryCaptureException(new Error('oops'))
     const { taskId, isLikedByMe } = input
-
     if (!ctx.me) throw new Error('UNAUTHORIZED')
     const task = await ctx.prisma.task.findUnique({
       where: {

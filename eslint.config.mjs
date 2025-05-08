@@ -19,6 +19,13 @@ export default tseslint.config(
       node,
       jest: jestPlugin,
     },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.ts', '.tsx', '.js'],
+        },
+      },
+    },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
       'node/no-process-env': 'error',
@@ -33,6 +40,18 @@ export default tseslint.config(
       'no-restricted-imports': 'off',
 
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            {
+              target: './src/**/!(*.integration.test.ts)',
+              from: './src/test',
+              message: 'Import something from test dir only inside integration tests',
+            },
+          ],
+        },
+      ],
       'import/order': [
         'error',
         {
