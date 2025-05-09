@@ -10,8 +10,10 @@ import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getViewTasksRoute } from '../../../lib/routes'
 import { trpc, trpcClient } from '../../../lib/trpc'
+import { CalendarPage } from '../../calendar'
 import css from './index.module.scss'
 export const AllTasksPage = withPageWrapper({
+  authorizedOnly: true,
   title: 'Calendar Task Management',
   isTitleExact: true,
 })(() => {
@@ -29,7 +31,7 @@ export const AllTasksPage = withPageWrapper({
         return trpcClient.getTasks.query({
           search: formik.values.search,
           cursor: pageParam,
-          limit: 5,
+          limit: 2,
         })
       },
       initialPageParam: 0,
@@ -37,41 +39,46 @@ export const AllTasksPage = withPageWrapper({
     })
 
   return (
-    <div>
-      <h1 className={css.title}>All Tasks</h1>
+    <>
+      <CalendarPage />
       <div>
-        <Input formik={formik} name="search" label="Search" width={'100%'} />
+        <h1 className={css.title}>All Tasks</h1>
+        <div>
+          <Input formik={formik} name="search" label="Search" width={'100%'} />
+        </div>
+        {isLoading || isRefetching || isPending ? (
+          <Loader type="section" />
+        ) : isError ? (
+          <div>{error.message}</div>
+        ) : !data.pages[0].tasks.length ? (
+          <div>Nothing found by search</div>
+        ) : (
+          <ul className={css.tasks}>
+            <InfiniteScroll
+              threshold={250}
+              loadMore={() => hasNextPage && !isFetchingNextPage && fetchNextPage()}
+              hasMore={hasNextPage}
+              loader={<Loader type="section" key={'loader'} />}
+              getScrollParent={() => layoutContentElRef.current}
+              useWindow={
+                (layoutContentElRef.current && getComputedStyle(layoutContentElRef.current).overflow) !== 'auto'
+              }
+            >
+              {data.pages
+                .flatMap((page) => page.tasks)
+                .map((task) => (
+                  <li key={task.id} className={css.task}>
+                    <Link className={css.taskName} to={getViewTasksRoute({ id: task.id })}>
+                      {task.title}
+                    </Link>
+                    <p className={css.taskDescription}>{task.description}</p>
+                    <div>Likes: {task.likesCount}</div>
+                  </li>
+                ))}
+            </InfiniteScroll>
+          </ul>
+        )}
       </div>
-      {isLoading || isRefetching || isPending ? (
-        <Loader type="section" />
-      ) : isError ? (
-        <div>{error.message}</div>
-      ) : !data.pages[0].tasks.length ? (
-        <div>Nothing found by search</div>
-      ) : (
-        <ul className={css.tasks}>
-          <InfiniteScroll
-            threshold={250}
-            loadMore={() => hasNextPage && !isFetchingNextPage && fetchNextPage()}
-            hasMore={hasNextPage}
-            loader={<Loader type="section" key={'loader'} />}
-            getScrollParent={() => layoutContentElRef.current}
-            useWindow={(layoutContentElRef.current && getComputedStyle(layoutContentElRef.current).overflow) !== 'auto'}
-          >
-            {data.pages
-              .flatMap((page) => page.tasks)
-              .map((task) => (
-                <li key={task.id} className={css.task}>
-                  <Link className={css.taskName} to={getViewTasksRoute({ id: task.id })}>
-                    {task.title}
-                  </Link>
-                  <p className={css.taskDescription}>{task.description}</p>
-                  <div>Likes: {task.likesCount}</div>
-                </li>
-              ))}
-          </InfiniteScroll>
-        </ul>
-      )}
-    </div>
+    </>
   )
 })

@@ -16,19 +16,18 @@ export const Layout = () => {
       <nav className={css.navigation}>
         <Logo className={css.logo} />
         <ul className={css.menu}>
-          <li className={css.item}>
-            <Link to={routes.getAllTasksRoute()}>All Tasks</Link>
-          </li>
-
           {me ? (
             <>
-              <li>
+              <li className={css.item}>
+                <Link to={routes.getAllTasksRoute()}>All Tasks</Link>
+              </li>
+              <li className={css.item}>
                 <Link to={routes.getNewTasksRoute()}>Add Task</Link>
               </li>
-              <li>
+              <li className={css.item}>
                 <Link to={routes.getEditProfileRoute()}>Edit Profile</Link>
               </li>
-              <li>
+              <li className={css.item}>
                 <Link to={routes.getSignOutRoute()}>Log Out ({me.name})</Link>
               </li>
             </>

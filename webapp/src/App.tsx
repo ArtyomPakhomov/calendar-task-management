@@ -9,12 +9,14 @@ import { EditProfilePage } from './pages/auth/EditProfilePage'
 import { SignInPage } from './pages/auth/SignInPage'
 import { SignOutPage } from './pages/auth/SignOutPage'
 import { SignUpPage } from './pages/auth/SignUpPage'
+import { CalendarPage } from './pages/calendar'
 import { NotFoundPage } from './pages/other/NotFoundPage'
 import { AllTasksPage } from './pages/tasks/AllTasksPage'
 import { EditTaskPage } from './pages/tasks/EditTaskPage'
 import { NewTaskPage } from './pages/tasks/NewTaskPage'
 import { ViewTaskPage } from './pages/tasks/ViewTaskPage'
 import './styles/global.scss'
+
 function App() {
   return (
     <TrpcProvider>
@@ -28,6 +30,7 @@ function App() {
               <Route path={routes.getSignUpRoute.route} element={<SignUpPage />} />
               <Route path={routes.getSignInRoute.route} element={<SignInPage />} />
               <Route path={routes.getEditProfileRoute.route} element={<EditProfilePage />} />
+              <Route path={routes.getCalendarRoute.route} element={<CalendarPage />} />
               <Route path={routes.getAllTasksRoute.route} element={<AllTasksPage />} />
               <Route path={routes.getNewTasksRoute.route} element={<NewTaskPage />} />
               <Route path={routes.getEditTaskRoute.route} element={<EditTaskPage />} />

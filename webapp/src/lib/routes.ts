@@ -14,4 +14,6 @@ export const getEditProfileRoute = pgr(() => '/edit-profile')
 
 export const getAllTasksRoute = pgr(() => '/')
 
+export const getCalendarRoute = pgr(() => '/calendar')
+
 export const getNewTasksRoute = pgr(() => '/tasks/new')
